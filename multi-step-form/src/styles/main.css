@@ -13,6 +13,12 @@
   --color-white: #ffffff;
 
   --color-background: var(--color-light-gray);
+  --color-foreground: var(--color-white);
+
+  --color-active-step-marker: var(--color-light-blue);
+  --color-step-text-muted: var(--color-pastel-blue);
+
+  --color-text: var(--color-marine-blue);
 }
 
 

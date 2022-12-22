@@ -1,0 +1,45 @@
+
+:root {
+  --color-marine-blue: #02295a;
+  --color-purplish-blue: #473dff;
+  --color-pastel-blue: #adbeff;
+  --color-light-blue: #bfe2fd;
+  --color-strawberry-red: #ed3548;
+
+  --color-cool-gray: #9699ab;
+  --color-light-gray: #d6d9e6;
+  --color-magnolia: #f0f6ff;
+  --color-alabaster: #fafbff;
+  --color-white: #ffffff;
+
+  --color-background: var(--color-light-gray);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--color-background);
+
+  font-size: 1.6rem;
+  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app,
+body {
+  min-height: 100vh;
+  width: 100%;
+}

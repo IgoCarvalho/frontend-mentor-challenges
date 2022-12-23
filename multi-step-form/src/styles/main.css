@@ -19,6 +19,12 @@
   --color-step-text-muted: var(--color-pastel-blue);
 
   --color-text: var(--color-marine-blue);
+  --color-text-muted: var(--color-cool-gray);
+
+  --color-input-border: var(--color-light-gray);
+  --color-input-border-active: var(--color-purplish-blue);
+  --color-input-error: var(--color-strawberry-red);
+  --color-input-placeholder: var(--color-cool-gray);
 }
 
 

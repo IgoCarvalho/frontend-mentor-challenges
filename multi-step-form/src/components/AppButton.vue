@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface AppButtonProps {
-  variant: 'primary' | 'secondary' | 'transparent';
+  variant?: 'primary' | 'secondary' | 'transparent';
 }
 
 withDefaults(defineProps<AppButtonProps>(), {

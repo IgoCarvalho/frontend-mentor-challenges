@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 import AppButton from './AppButton.vue';
 import AppInput from './AppInput.vue';
 import FormSection from './FormSection.vue';
+import InputRadioBox from './InputRadioBox.vue';
+
+import ArcadeIcon from './icons/ArcadeIcon.vue';
+import AdvancedIcon from './icons/AdvancedIcon.vue';
+import ProIcon from './icons/ProIcon.vue';
+
+const plan = ref('');
 </script>
 
 <template>
   <form class="form">
     <FormSection
+      v-if="false"
       title="Personal Info"
       subtitle="Please provide your name, email address, and phone number."
     >
@@ -25,6 +35,33 @@ import FormSection from './FormSection.vue';
           placeholder="e.g. +1 234 567 890"
           error="This field is required"
         />
+      </div>
+    </FormSection>
+
+    <FormSection
+      title="Select your plan"
+      subtitle="Add-ons help enhance your game experience."
+    >
+      <div class="form-ratio-box-container">
+        <InputRadioBox
+          v-model="plan"
+          label="Arcade"
+          name="arcade"
+          price="$9/mo"
+        >
+          <ArcadeIcon />
+        </InputRadioBox>
+        <InputRadioBox
+          v-model="plan"
+          label="Advanced"
+          name="advanced"
+          price="$12/mo"
+        >
+          <AdvancedIcon />
+        </InputRadioBox>
+        <InputRadioBox v-model="plan" label="Pro" name="pro" price="$15/mo">
+          <ProIcon />
+        </InputRadioBox>
       </div>
     </FormSection>
 
@@ -47,6 +84,12 @@ import FormSection from './FormSection.vue';
   flex-direction: column;
   gap: 1.6rem;
   margin-top: 4rem;
+}
+
+.form-ratio-box-container {
+  display: flex;
+  gap: 1rem;
+  padding-top: 4.4rem;
 }
 
 .form-action-buttons {

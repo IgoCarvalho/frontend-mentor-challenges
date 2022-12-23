@@ -28,6 +28,10 @@
 
   --color-btn: var(--color-marine-blue);
   --color-btn-secondary: var(--color-purplish-blue);
+
+  --color-radio-box-border: var(--color-light-gray);
+  --color-radio-box-border-hover: var(--color-purplish-blue);
+  --color-radio-box-check-bg: var(--color-alabaster);
 }
 
 

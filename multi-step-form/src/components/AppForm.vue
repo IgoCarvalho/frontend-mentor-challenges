@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import AppButton from './AppButton.vue';
 import AppInput from './AppInput.vue';
+import FormSection from './FormSection.vue';
 </script>
 
 <template>
   <form class="form">
-    <fieldset class="form-group">
-      <legend class="form-group-title">Personal Info</legend>
-      <span class="form-group-subtitle">
-        Please provide your name, email address, and phone number.
-      </span>
-
+    <FormSection
+      title="Personal Info"
+      subtitle="Please provide your name, email address, and phone number."
+    >
       <div class="form-inputs-container">
         <AppInput name="name" label="Name" placeholder="e.g. Stephen King" />
         <AppInput
@@ -27,7 +26,7 @@ import AppInput from './AppInput.vue';
           error="This field is required"
         />
       </div>
-    </fieldset>
+    </FormSection>
 
     <div class="form-action-buttons">
       <AppButton variant="transparent"> Go Back </AppButton>
@@ -41,20 +40,6 @@ import AppInput from './AppInput.vue';
   flex: 1;
   padding: 2rem 10rem;
   position: relative;
-}
-
-.form-group {
-  border: none;
-}
-.form-group-title {
-  font-size: 3.2rem;
-  color: var(--color-text);
-  font-weight: 700;
-  margin-bottom: 1.6rem;
-}
-
-.form-group-subtitle {
-  color: var(--color-text-muted);
 }
 
 .form-inputs-container {

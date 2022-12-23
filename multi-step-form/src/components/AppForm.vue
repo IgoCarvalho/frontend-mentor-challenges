@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppButton from './AppButton.vue';
 import AppInput from './AppInput.vue';
 </script>
 
@@ -27,6 +28,11 @@ import AppInput from './AppInput.vue';
         />
       </div>
     </fieldset>
+
+    <div class="form-action-buttons">
+      <AppButton variant="transparent"> Go Back </AppButton>
+      <AppButton> Next Step </AppButton>
+    </div>
   </form>
 </template>
 
@@ -34,6 +40,7 @@ import AppInput from './AppInput.vue';
 .form {
   flex: 1;
   padding: 2rem 10rem;
+  position: relative;
 }
 
 .form-group {
@@ -55,5 +62,15 @@ import AppInput from './AppInput.vue';
   flex-direction: column;
   gap: 1.6rem;
   margin-top: 4rem;
+}
+
+.form-action-buttons {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 0;
+  padding: 0 10rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 </style>

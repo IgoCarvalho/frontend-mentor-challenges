@@ -56,7 +56,7 @@ defineProps<AppInputProps>();
 .input-base {
   color: var(--color-text);
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 500;
   padding: 1.6rem;
   border-radius: 0.8rem;
   border: 1px solid var(--color-input-border);

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppForm from './components/AppForm.vue';
 import FormStepper from './components/FormStepper.vue';
 
 const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
@@ -8,7 +9,7 @@ const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
   <main>
     <div class="container">
       <FormStepper :stepsLabel="formSteps" :currentStep="0" />
-      <form></form>
+      <AppForm />
     </div>
   </main>
 </template>
@@ -26,6 +27,7 @@ main {
   margin: 0 auto;
   border-radius: 1.6rem;
   padding: 1.6rem;
+  padding-right: 0;
   display: flex;
 }
 </style>

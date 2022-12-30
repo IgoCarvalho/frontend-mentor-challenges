@@ -10,6 +10,7 @@ interface FormFinishingUpProps {
   planDuration: string;
   addOns: FormFinishingUpAddOn[];
   totalPrice: string;
+  onChangePlan: () => void;
 }
 
 defineProps<FormFinishingUpProps>();
@@ -21,7 +22,9 @@ defineProps<FormFinishingUpProps>();
       <div class="finishing-plan">
         <div class="plan-info">
           <p class="plan-title">{{ planName }} (Monthly)</p>
-          <button class="plan-change-btn">Change</button>
+          <button type="button" @click="onChangePlan" class="plan-change-btn">
+            Change
+          </button>
         </div>
         <span class="plan-price">{{ planPrice }}</span>
       </div>

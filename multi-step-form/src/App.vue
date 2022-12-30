@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import AppForm from './components/AppForm.vue';
-import FormStepper from './components/FormStepper.vue';
-
-const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
 </script>
 
 <template>
   <main>
     <div class="container">
-      <FormStepper :stepsLabel="formSteps" :currentStep="0" />
       <AppForm />
     </div>
   </main>

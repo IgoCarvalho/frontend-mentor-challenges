@@ -63,6 +63,7 @@ defineProps<FormStepperProps>();
   align-items: center;
   font-size: 1.4rem;
   font-weight: 700;
+  transition: 500ms;
 }
 
 .step-counter--active {

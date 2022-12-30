@@ -27,7 +27,9 @@
   --color-input-placeholder: var(--color-cool-gray);
 
   --color-btn: var(--color-marine-blue);
+  --color-btn-hover: #174a8b;
   --color-btn-secondary: var(--color-purplish-blue);
+  --color-btn-secondary-hover: #938cfe;
 
   --color-radio-box-border: var(--color-light-gray);
   --color-radio-box-border-hover: var(--color-purplish-blue);

@@ -210,7 +210,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
 
 .form {
   flex: 1;
-  padding: 2rem 10rem;
+  padding: 4rem 10rem 2rem;
   position: relative;
 }
 

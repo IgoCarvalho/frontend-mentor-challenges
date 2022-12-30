@@ -22,15 +22,22 @@ withDefaults(defineProps<AppButtonProps>(), {
   border: none;
   border-radius: 0.8rem;
   cursor: pointer;
+  transition: 200ms;
 }
 .btn--primary {
   background-color: var(--color-btn);
   color: var(--color-white);
 }
+.btn--primary:hover {
+  background-color: var(--color-btn-hover);
+}
 
 .btn--secondary {
   background-color: var(--color-btn-secondary);
   color: var(--color-white);
+}
+.btn--secondary:hover {
+  background-color: var(--color-btn-secondary-hover);
 }
 
 .btn--transparent {

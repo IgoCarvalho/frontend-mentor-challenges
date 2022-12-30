@@ -25,5 +25,6 @@ main {
   padding: 1.6rem;
   padding-right: 0;
   display: flex;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 </style>

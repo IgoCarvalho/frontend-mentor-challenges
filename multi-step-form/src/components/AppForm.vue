@@ -11,9 +11,16 @@ import AdvancedIcon from './icons/AdvancedIcon.vue';
 import ProIcon from './icons/ProIcon.vue';
 import AppSwitch from './AppSwitch.vue';
 import AppCheckBox from './AppCheckBox.vue';
+import FormFinishingUp from './FormFinishingUp.vue';
+import type { FormFinishingUpAddOn } from './FormFinishingUp.vue';
 
 const plan = ref('');
 const addOns = ref<String[]>([]);
+
+const formAddOns: FormFinishingUpAddOn[] = [
+  { title: 'Online service', price: '+$1/mo' },
+  { title: 'Large storage', price: '+$2/mo' },
+];
 </script>
 
 <template>
@@ -74,6 +81,7 @@ const addOns = ref<String[]>([]);
     </FormSection>
 
     <FormSection
+      v-if="false"
       title="Pick add-ons"
       subtitle="Add-ons help enhance your gaming experience."
     >
@@ -98,6 +106,21 @@ const addOns = ref<String[]>([]);
           label="Customizable profile"
           description="Custom theme on your profile"
           price="+$2/mo"
+        />
+      </div>
+    </FormSection>
+
+    <FormSection
+      title="Finishing up"
+      subtitle="Double-check everything looks OK before confirming."
+    >
+      <div class="finishing-up-container">
+        <FormFinishingUp
+          planName="Arcade"
+          planPrice="$9/mo"
+          planDuration="mo"
+          :addOns="formAddOns"
+          totalPrice="+$12/mo"
         />
       </div>
     </FormSection>
@@ -143,6 +166,10 @@ const addOns = ref<String[]>([]);
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+}
+
+.finishing-up-container {
+  margin-top: 4.2rem;
 }
 
 .form-action-buttons {

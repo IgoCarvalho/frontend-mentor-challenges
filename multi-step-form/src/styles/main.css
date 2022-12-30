@@ -41,6 +41,11 @@
   --color-check-border: var(--color-light-gray);
   --color-check-border-active: var(--color-purplish-blue);
   --color-check-active-bg: var(--color-alabaster);
+
+  --color-finishing-bg: var(--color-alabaster);
+  --color-finishing-plan-border: var(--color-light-gray);
+  --color-finishing-plan-change-btn-hover: var(--color-purplish-blue);
+  --color-finishing-total-price: var(--color-purplish-blue);
 }
 
 

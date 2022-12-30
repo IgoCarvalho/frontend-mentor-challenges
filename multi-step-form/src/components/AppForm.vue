@@ -9,6 +9,7 @@ import InputRadioBox from './InputRadioBox.vue';
 import ArcadeIcon from './icons/ArcadeIcon.vue';
 import AdvancedIcon from './icons/AdvancedIcon.vue';
 import ProIcon from './icons/ProIcon.vue';
+import AppSwitch from './AppSwitch.vue';
 
 const plan = ref('');
 </script>
@@ -42,7 +43,7 @@ const plan = ref('');
       title="Select your plan"
       subtitle="Add-ons help enhance your game experience."
     >
-      <div class="form-ratio-box-container">
+      <div class="form-radio-box-container">
         <InputRadioBox
           v-model="plan"
           label="Arcade"
@@ -62,6 +63,10 @@ const plan = ref('');
         <InputRadioBox v-model="plan" label="Pro" name="pro" price="$15/mo">
           <ProIcon />
         </InputRadioBox>
+      </div>
+
+      <div class="plan-duration-selection-container">
+        <AppSwitch onText="Yearly" offText="Monthly" />
       </div>
     </FormSection>
 
@@ -86,10 +91,19 @@ const plan = ref('');
   margin-top: 4rem;
 }
 
-.form-ratio-box-container {
+.form-radio-box-container {
   display: flex;
   gap: 1rem;
   padding-top: 4.4rem;
+}
+
+.plan-duration-selection-container {
+  background-color: var(--color-plan-period-bg);
+  padding: 1.4rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 3.2rem;
+  border-radius: 0.8rem;
 }
 
 .form-action-buttons {

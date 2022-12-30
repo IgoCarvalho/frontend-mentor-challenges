@@ -32,6 +32,11 @@
   --color-radio-box-border: var(--color-light-gray);
   --color-radio-box-border-hover: var(--color-purplish-blue);
   --color-radio-box-check-bg: var(--color-alabaster);
+
+  --color-plan-period-bg: var(--color-alabaster);
+  --color-switch-toggle-bg: var(--color-marine-blue);
+  --color-switch-toggle-circle: var(--color-white);
+
 }
 
 

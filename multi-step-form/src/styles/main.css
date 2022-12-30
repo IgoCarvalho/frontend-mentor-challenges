@@ -37,6 +37,10 @@
   --color-switch-toggle-bg: var(--color-marine-blue);
   --color-switch-toggle-circle: var(--color-white);
 
+  --color-check-price: var(--color-purplish-blue);
+  --color-check-border: var(--color-light-gray);
+  --color-check-border-active: var(--color-purplish-blue);
+  --color-check-active-bg: var(--color-alabaster);
 }
 
 

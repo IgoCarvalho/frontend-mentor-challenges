@@ -10,8 +10,10 @@ import ArcadeIcon from './icons/ArcadeIcon.vue';
 import AdvancedIcon from './icons/AdvancedIcon.vue';
 import ProIcon from './icons/ProIcon.vue';
 import AppSwitch from './AppSwitch.vue';
+import AppCheckBox from './AppCheckBox.vue';
 
 const plan = ref('');
+const addOns = ref<String[]>([]);
 </script>
 
 <template>
@@ -40,6 +42,7 @@ const plan = ref('');
     </FormSection>
 
     <FormSection
+      v-if="false"
       title="Select your plan"
       subtitle="Add-ons help enhance your game experience."
     >
@@ -67,6 +70,35 @@ const plan = ref('');
 
       <div class="plan-duration-selection-container">
         <AppSwitch onText="Yearly" offText="Monthly" />
+      </div>
+    </FormSection>
+
+    <FormSection
+      title="Pick add-ons"
+      subtitle="Add-ons help enhance your gaming experience."
+    >
+      <div class="add-ons-selection-container">
+        <AppCheckBox
+          v-model="addOns"
+          name="online-service"
+          label="Online service"
+          description="Access to multiplayer games"
+          price="+$1/mo"
+        />
+        <AppCheckBox
+          v-model="addOns"
+          name="large-storage"
+          label="Large storage"
+          description="Extra 1TB of cloud save"
+          price="+$2/mo"
+        />
+        <AppCheckBox
+          v-model="addOns"
+          name="customizable-profile"
+          label="Customizable profile"
+          description="Custom theme on your profile"
+          price="+$2/mo"
+        />
       </div>
     </FormSection>
 
@@ -104,6 +136,13 @@ const plan = ref('');
   justify-content: center;
   margin-top: 3.2rem;
   border-radius: 0.8rem;
+}
+
+.add-ons-selection-container {
+  margin-top: 4.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 
 .form-action-buttons {

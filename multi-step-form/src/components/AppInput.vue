@@ -5,28 +5,36 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { toRef } from 'vue';
+import { useField } from 'vee-validate';
+
 interface AppInputProps {
   name: string;
   label: string;
-  error?: string;
 }
 
-defineProps<AppInputProps>();
+const props = defineProps<AppInputProps>();
+
+const nameRef = toRef(props, 'name');
+const { errorMessage, value } = useField(nameRef);
 </script>
 
 <template>
   <div class="input-container">
     <div class="input-info">
       <label class="input-label" :for="name">{{ label }}</label>
-      <span v-show="error" class="input-error-message">{{ error }}</span>
+      <span v-show="errorMessage" class="input-error-message">{{
+        errorMessage
+      }}</span>
     </div>
     <input
       class="input-base"
-      :class="{ 'input-base-error': error }"
+      :class="{ 'input-base-error': errorMessage }"
       :id="name"
       :name="name"
       type="text"
       v-bind="$attrs"
+      v-model="value"
     />
   </div>
 </template>

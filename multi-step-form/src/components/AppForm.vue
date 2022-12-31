@@ -1,25 +1,34 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { Form } from 'vee-validate';
+import * as yup from 'yup';
 
 import AppButton from './AppButton.vue';
 import AppInput from './AppInput.vue';
 import FormSection from './FormSection.vue';
 import InputRadioBox from './InputRadioBox.vue';
+import AppSwitch from './AppSwitch.vue';
+import AppCheckBox from './AppCheckBox.vue';
+import FormFinishingUp from './FormFinishingUp.vue';
+import FormStepper from './FormStepper.vue';
 
 import ArcadeIcon from './icons/ArcadeIcon.vue';
 import AdvancedIcon from './icons/AdvancedIcon.vue';
 import ProIcon from './icons/ProIcon.vue';
-import AppSwitch from './AppSwitch.vue';
-import AppCheckBox from './AppCheckBox.vue';
-import FormFinishingUp from './FormFinishingUp.vue';
+
 import type { FormFinishingUpAddOn } from './FormFinishingUp.vue';
-import FormStepper from './FormStepper.vue';
 
 const plan = ref('');
 const addOns = ref<String[]>([]);
 const formStep = ref(0);
 const slideDirection = ref<'left' | 'right'>('left');
 const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
+
+const formSchema = yup.object({
+  name: yup.string().required().min(3),
+  email: yup.string().required().email(),
+  phone: yup.string().required(),
+});
 
 watch(formStep, (actualStep, oldStep) => {
   const slideToNextStep = actualStep > oldStep;
@@ -62,7 +71,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
 <template>
   <FormStepper :stepsLabel="formSteps" :currentStep="formStep" />
 
-  <form class="form">
+  <Form class="form" :validation-schema="formSchema">
     <Transition mode="out-in" :name="`slide-${slideDirection}`">
       <FormSection
         v-if="formStep === 0"
@@ -78,11 +87,10 @@ function setSlideDirection(slidingToNextStep: boolean) {
             placeholder="e.g. stephenking@lorem.com"
           />
           <AppInput
-            name="phoneNumber"
+            name="phone"
             label="Phone Number"
-            type="number"
+            type="phone"
             placeholder="e.g. +1 234 567 890"
-            error="This field is required"
           />
         </div>
       </FormSection>
@@ -180,7 +188,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
         Confirm
       </AppButton>
     </div>
-  </form>
+  </Form>
 </template>
 
 <style scoped>

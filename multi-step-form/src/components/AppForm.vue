@@ -106,6 +106,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
             label="Arcade"
             name="arcade"
             price="$9/mo"
+            info="2 months free"
           >
             <ArcadeIcon />
           </InputRadioBox>
@@ -114,10 +115,17 @@ function setSlideDirection(slidingToNextStep: boolean) {
             label="Advanced"
             name="advanced"
             price="$12/mo"
+            info="2 months free"
           >
             <AdvancedIcon />
           </InputRadioBox>
-          <InputRadioBox v-model="plan" label="Pro" name="pro" price="$15/mo">
+          <InputRadioBox
+            v-model="plan"
+            label="Pro"
+            name="pro"
+            price="$15/mo"
+            info="2 months free"
+          >
             <ProIcon />
           </InputRadioBox>
         </div>

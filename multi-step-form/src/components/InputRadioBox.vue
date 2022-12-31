@@ -5,6 +5,7 @@ interface InputRadioBoxProps {
   name: string;
   label: string;
   price: string;
+  info: string;
   modelValue?: string;
 }
 const props = defineProps<InputRadioBoxProps>();
@@ -41,6 +42,7 @@ const isChecked = computed(() => {
     <div class="radio-box-info">
       <p class="radio-box-title">{{ label }}</p>
       <span class="radio-box-subtitle">{{ price }}</span>
+      <span class="radio-box-detail">{{ info }}</span>
     </div>
   </label>
 </template>
@@ -74,15 +76,26 @@ input:checked + .radio-box {
   margin-bottom: 4.4rem;
 }
 
+.radio-box-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
 .radio-box-title {
   font-size: 1.6rem;
   font-weight: 500;
   color: var(--color-text);
-  margin-bottom: 0.8rem;
 }
 
 .radio-box-subtitle {
   font-size: 1.4rem;
   color: var(--color-text-muted);
+}
+
+.radio-box-detail {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-text);
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Form } from 'vee-validate';
 import * as yup from 'yup';
 
@@ -24,10 +24,16 @@ const formStep = ref(0);
 const slideDirection = ref<'left' | 'right'>('left');
 const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
 
-const formSchema = yup.object({
-  name: yup.string().required().min(3),
-  email: yup.string().required().email(),
-  phone: yup.string().required(),
+const formSchema = [
+  yup.object({
+    name: yup.string().required().min(3),
+    email: yup.string().required().email(),
+    phone: yup.string().required(),
+  }),
+];
+
+const currentSchema = computed(() => {
+  return formSchema[formStep.value];
 });
 
 watch(formStep, (actualStep, oldStep) => {
@@ -71,7 +77,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
 <template>
   <FormStepper :stepsLabel="formSteps" :currentStep="formStep" />
 
-  <Form class="form" :validation-schema="formSchema">
+  <Form class="form" @submit="nextStep" :validation-schema="currentSchema">
     <Transition mode="out-in" :name="`slide-${slideDirection}`">
       <FormSection
         v-if="formStep === 0"
@@ -187,7 +193,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
       <AppButton v-if="formStep > 0" @click="prevStep" variant="transparent">
         Go Back
       </AppButton>
-      <AppButton v-if="formStep < 3" @click="nextStep"> Next Step </AppButton>
+      <AppButton v-if="formStep < 3" type="submit"> Next Step </AppButton>
       <AppButton
         v-if="formStep === 3"
         @click="formConfirmation"

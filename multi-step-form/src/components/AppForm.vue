@@ -327,7 +327,7 @@ const selectedAddOns = computed(() => {
 .form-radio-box-container {
   display: flex;
   gap: 1rem;
-  padding-top: 4.4rem;
+  margin-top: 4.4rem;
 }
 
 .plan-duration-selection-container {
@@ -362,5 +362,30 @@ const selectedAddOns = computed(() => {
 
 .form-action-buttons.one-button {
   justify-content: flex-end;
+}
+
+@media screen and (max-width: 425px) {
+  .form {
+    position: initial;
+    align-self: flex-start;
+    padding: 3.1rem 2.4rem;
+    border-radius: 0.8rem;
+    background-color: var(--color-foreground);
+  }
+
+  .form-radio-box-container {
+    flex-direction: column;
+    margin-top: 2.5rem;
+  }
+
+  .add-ons-selection-container {
+    margin-top: 2.5rem;
+  }
+
+  .form-action-buttons {
+    bottom: 0;
+    padding: 1.6rem;
+    background-color: var(--color-foreground);
+  }
 }
 </style>

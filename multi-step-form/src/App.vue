@@ -27,4 +27,17 @@ main {
   display: flex;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+
+@media screen and (max-width: 425px) {
+  main {
+    align-items: initial;
+  }
+
+  .container {
+    background-color: initial;
+    padding: 1.6rem;
+    padding-top: 10rem;
+    z-index: 10;
+  }
+}
 </style>

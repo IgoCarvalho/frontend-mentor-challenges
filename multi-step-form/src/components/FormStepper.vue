@@ -91,4 +91,26 @@ const currentStepIndex = computed(() => {
   font-weight: 700;
   font-size: 1.4rem;
 }
+
+@media screen and (max-width: 425px) {
+  .stepper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 17.2rem;
+    padding: 3.2rem 10rem;
+    flex-direction: initial;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: initial;
+    background-image: url('@/assets/images/bg-sidebar-mobile.svg');
+    border-radius: 0;
+    z-index: -1;
+  }
+
+  .step-info {
+    display: none;
+  }
+}
 </style>

@@ -150,4 +150,27 @@ input:checked + .check {
   font-size: 1.4rem;
   color: var(--color-check-price);
 }
+
+@media screen and (max-width: 425px) {
+  .check {
+    padding: 1.6rem;
+    gap: 1.6rem;
+  }
+  .check::after {
+    left: 1.6rem;
+  }
+
+  .check-info {
+    gap: 0.8rem;
+  }
+
+  .check-title {
+    font-size: 1.4rem;
+  }
+
+  .check-subtitle,
+  .check-price {
+    font-size: 1.2rem;
+  }
+}
 </style>

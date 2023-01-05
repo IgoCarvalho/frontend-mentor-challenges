@@ -30,4 +30,15 @@ defineProps<FormSectionProps>();
 .form-section-subtitle {
   color: var(--color-text-muted);
 }
+
+@media screen and (max-width: 425px) {
+  .form-section-title {
+    font-size: 2.4rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .form-section-subtitle {
+    line-height: 1.2;
+  }
+}
 </style>

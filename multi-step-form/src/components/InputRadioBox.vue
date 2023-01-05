@@ -102,4 +102,15 @@ input:checked + .radio-box {
   font-weight: 400;
   color: var(--color-text);
 }
+
+@media screen and (max-width: 425px) {
+  .radio-box {
+    flex-direction: initial;
+    gap: 1.2rem;
+  }
+
+  .radio-box-icon {
+    margin-bottom: 0;
+  }
+}
 </style>

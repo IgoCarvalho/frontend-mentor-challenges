@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { useField } from 'vee-validate';
+import { computed, toRef } from 'vue';
 
 interface InputRadioBoxProps {
   name: string;
+  value: string;
   label: string;
   price: string;
-  info: string;
+  info: string | boolean;
   modelValue?: string;
 }
 const props = defineProps<InputRadioBoxProps>();
@@ -24,17 +26,19 @@ function handleInputChange(e: Event) {
 const isChecked = computed(() => {
   return props.modelValue === props.name;
 });
+
+const nameRef = toRef(props, 'name');
+const { value: veeValue } = useField(nameRef);
 </script>
 
 <template>
   <input
     type="radio"
-    :id="name"
-    :checked="isChecked"
-    :value="name"
-    @change="handleInputChange"
+    :id="`${name}-${value}`"
+    :value="value"
+    v-model="veeValue"
   />
-  <label :for="name" class="radio-box">
+  <label :for="`${name}-${value}`" class="radio-box">
     <div class="radio-box-icon">
       <slot></slot>
     </div>
@@ -42,7 +46,7 @@ const isChecked = computed(() => {
     <div class="radio-box-info">
       <p class="radio-box-title">{{ label }}</p>
       <span class="radio-box-subtitle">{{ price }}</span>
-      <span class="radio-box-detail">{{ info }}</span>
+      <span class="radio-box-detail" v-show="info">{{ info }}</span>
     </div>
   </label>
 </template>

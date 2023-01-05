@@ -1,15 +1,40 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface AppSwitchProps {
   onText: string;
+  onValue: string;
   offText: string;
+  offValue: string;
+  modelValue: string;
+}
+const props = defineProps<AppSwitchProps>();
+
+interface AppSwitchEmits {
+  (e: 'update:modelValue', value: string): void;
 }
 
-defineProps<AppSwitchProps>();
+const emit = defineEmits<AppSwitchEmits>();
+
+const isChecked = computed(() => {
+  return props.modelValue === props.onValue;
+});
+
+function handleSwitchChange(e: Event) {
+  const input = e.target as HTMLInputElement;
+
+  const inputValue = input.checked ? props.onValue : props.offValue;
+  emit('update:modelValue', inputValue);
+}
+
+if (props.modelValue === '') {
+  emit('update:modelValue', props.offValue);
+}
 </script>
 
 <template>
   <label class="switch">
-    <input type="checkbox" />
+    <input type="checkbox" :checked="isChecked" @change="handleSwitchChange" />
 
     <span class="switch-off-text">{{ offText }}</span>
 

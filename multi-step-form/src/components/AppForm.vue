@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { Form } from 'vee-validate';
+import { ErrorMessage, Form } from 'vee-validate';
 import * as yup from 'yup';
 
 import AppButton from './AppButton.vue';
@@ -12,15 +12,13 @@ import AppCheckBox from './AppCheckBox.vue';
 import FormFinishingUp from './FormFinishingUp.vue';
 import FormStepper from './FormStepper.vue';
 
-import ArcadeIcon from './icons/ArcadeIcon.vue';
-import AdvancedIcon from './icons/AdvancedIcon.vue';
-import ProIcon from './icons/ProIcon.vue';
-
 import type { FormFinishingUpAddOn } from './FormFinishingUp.vue';
+import type { PlanDuration } from '@/types';
 
-const plan = ref('');
-const addOns = ref<String[]>([]);
-const formStep = ref(0);
+import { plans, addOns } from '@/data';
+
+const planDuration = ref<PlanDuration>('monthly');
+const formStep = ref(1);
 const slideDirection = ref<'left' | 'right'>('left');
 const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
 
@@ -29,6 +27,16 @@ const formSchema = [
     name: yup.string().required().min(3),
     email: yup.string().required().email(),
     phone: yup.string().required(),
+  }),
+  yup.object({
+    plan: yup.string().required('Choose a plan'),
+  }),
+  yup.object({
+    'add-ons': yup
+      .array()
+      .of(yup.string().required())
+      .min(1, 'Select at least 1 items')
+      .required('Select at least 1 items'),
   }),
 ];
 
@@ -77,7 +85,13 @@ function setSlideDirection(slidingToNextStep: boolean) {
 <template>
   <FormStepper :stepsLabel="formSteps" :currentStep="formStep" />
 
-  <Form class="form" @submit="nextStep" :validation-schema="currentSchema">
+  <Form
+    v-slot="{ meta }"
+    class="form"
+    @submit="nextStep"
+    keep-values
+    :validation-schema="currentSchema"
+  >
     <Transition mode="out-in" :name="`slide-${slideDirection}`">
       <FormSection
         v-if="formStep === 0"
@@ -108,37 +122,33 @@ function setSlideDirection(slidingToNextStep: boolean) {
       >
         <div class="form-radio-box-container">
           <InputRadioBox
-            v-model="plan"
-            label="Arcade"
-            name="arcade"
-            price="$9/mo"
-            info="2 months free"
+            v-for="plan in plans"
+            :key="plan.id"
+            :label="plan.name"
+            name="plan"
+            :value="plan.id"
+            :price="plan.price[planDuration].text"
+            :info="planDuration === 'yearly' && plan.discount"
           >
-            <ArcadeIcon />
-          </InputRadioBox>
-          <InputRadioBox
-            v-model="plan"
-            label="Advanced"
-            name="advanced"
-            price="$12/mo"
-            info="2 months free"
-          >
-            <AdvancedIcon />
-          </InputRadioBox>
-          <InputRadioBox
-            v-model="plan"
-            label="Pro"
-            name="pro"
-            price="$15/mo"
-            info="2 months free"
-          >
-            <ProIcon />
+            <Component :is="plan.icon" />
           </InputRadioBox>
         </div>
 
         <div class="plan-duration-selection-container">
-          <AppSwitch onText="Yearly" offText="Monthly" />
+          <AppSwitch
+            v-model="planDuration"
+            onText="Yearly"
+            onValue="yearly"
+            offText="Monthly"
+            offValue="monthly"
+          />
         </div>
+
+        <ErrorMessage
+          v-if="meta.touched"
+          name="plan"
+          class="error-message-container"
+        />
       </FormSection>
 
       <FormSection
@@ -148,27 +158,21 @@ function setSlideDirection(slidingToNextStep: boolean) {
       >
         <div class="add-ons-selection-container">
           <AppCheckBox
-            v-model="addOns"
-            name="online-service"
-            label="Online service"
-            description="Access to multiplayer games"
-            price="+$1/mo"
-          />
-          <AppCheckBox
-            v-model="addOns"
-            name="large-storage"
-            label="Large storage"
-            description="Extra 1TB of cloud save"
-            price="+$2/mo"
-          />
-          <AppCheckBox
-            v-model="addOns"
-            name="customizable-profile"
-            label="Customizable profile"
-            description="Custom theme on your profile"
-            price="+$2/mo"
+            v-for="addOn in addOns"
+            :key="addOn.id"
+            name="add-ons"
+            :label="addOn.name"
+            :value="addOn.id"
+            :description="addOn.description"
+            :price="addOn.price[planDuration].text"
           />
         </div>
+
+        <ErrorMessage
+          v-if="meta.touched"
+          name="add-ons"
+          class="error-message-container"
+        />
       </FormSection>
 
       <FormSection
@@ -243,6 +247,16 @@ function setSlideDirection(slidingToNextStep: boolean) {
   margin-top: 4rem;
 }
 
+.error-message-container {
+  display: block;
+  background-color: var(--color-text-error-bg);
+  color: var(--color-text-error);
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  margin-top: 1rem;
+}
 .form-radio-box-container {
   display: flex;
   gap: 1rem;

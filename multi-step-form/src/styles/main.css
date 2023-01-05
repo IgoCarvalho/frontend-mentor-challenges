@@ -19,6 +19,8 @@
   --color-step-text-muted: var(--color-pastel-blue);
 
   --color-text: var(--color-marine-blue);
+  --color-text-error: var(--color-strawberry-red);
+  --color-text-error-bg: #feeaed;
   --color-text-muted: var(--color-cool-gray);
 
   --color-input-border: var(--color-light-gray);

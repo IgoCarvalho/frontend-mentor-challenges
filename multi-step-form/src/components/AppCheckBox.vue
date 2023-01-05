@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { useField } from 'vee-validate';
+import { computed, toRef } from 'vue';
 
 interface AppCheckBoxProps {
   name: string;
+  value: string;
   label: string;
   description: string;
   price: string;
-  modelValue: string | String[];
+  modelValue?: string | String[];
 }
 const props = defineProps<AppCheckBoxProps>();
 
@@ -26,6 +28,8 @@ const isChecked = computed(() => {
 function handleCheckChange(e: Event) {
   const input = e.target as HTMLInputElement;
 
+  if (!props.modelValue) return;
+
   if (typeof props.modelValue === 'string') {
     emit('update:modelValue', input.value);
     return;
@@ -41,17 +45,23 @@ function handleCheckChange(e: Event) {
 
   emit('update:modelValue', updatedValue);
 }
+
+const nameRef = toRef(props, 'name');
+const { checked, handleChange } = useField(nameRef, undefined, {
+  type: 'checkbox',
+  checkedValue: props.value,
+});
 </script>
 
 <template>
   <input
-    :id="name"
+    :id="`${name}-${value}`"
     type="checkbox"
-    :value="name"
-    :checked="isChecked"
-    @change="handleCheckChange"
+    :value="value"
+    :checked="checked"
+    @change="handleChange(value)"
   />
-  <label :for="name" class="check">
+  <label :for="`${name}-${value}`" class="check">
     <div class="check-content">
       <div class="check-info">
         <p class="check-title">{{ label }}</p>

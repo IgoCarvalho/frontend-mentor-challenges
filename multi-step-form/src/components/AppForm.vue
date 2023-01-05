@@ -11,6 +11,7 @@ import AppSwitch from './AppSwitch.vue';
 import AppCheckBox from './AppCheckBox.vue';
 import FormFinishingUp from './FormFinishingUp.vue';
 import FormStepper from './FormStepper.vue';
+import FormThanksVue from './FormThanks.vue';
 
 import type { FormFinishingUpAddOn } from './FormFinishingUp.vue';
 import type { PlanDuration } from '@/types';
@@ -63,7 +64,7 @@ function goToStep(step: number) {
 }
 
 function formConfirmation() {
-  window.alert('Thankyou!');
+  nextStep();
 }
 
 function navigateToPlanStep() {
@@ -89,8 +90,7 @@ const { meta, handleSubmit, values } = useForm<FormFields>({
   keepValuesOnUnmount: true,
 });
 
-const onSubmit = handleSubmit((values) => {
-  console.log({ values });
+const onSubmit = handleSubmit(() => {
   nextStep();
 });
 
@@ -252,9 +252,15 @@ const selectedAddOns = computed(() => {
           />
         </div>
       </FormSection>
+
+      <FormThanksVue v-else />
     </Transition>
 
-    <div class="form-action-buttons" :class="{ 'one-button': formStep <= 0 }">
+    <div
+      v-if="formStep < 4"
+      class="form-action-buttons"
+      :class="{ 'one-button': formStep <= 0 }"
+    >
       <AppButton v-if="formStep > 0" @click="prevStep" variant="transparent">
         Go Back
       </AppButton>

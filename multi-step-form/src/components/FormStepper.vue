@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface FormStepperProps {
   stepsLabel: string[];
   currentStep: number;
 }
 
-defineProps<FormStepperProps>();
+const props = defineProps<FormStepperProps>();
+
+const currentStepIndex = computed(() => {
+  const stepsRange = props.stepsLabel.length - 1;
+
+  return props.currentStep > stepsRange ? stepsRange : props.currentStep;
+});
 </script>
 
 <template>
@@ -16,7 +24,7 @@ defineProps<FormStepperProps>();
     >
       <div
         class="step-counter"
-        :class="{ 'step-counter--active': index === currentStep }"
+        :class="{ 'step-counter--active': index === currentStepIndex }"
       >
         {{ index + 1 }}
       </div>

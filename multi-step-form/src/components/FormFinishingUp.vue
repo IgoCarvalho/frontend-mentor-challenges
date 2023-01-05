@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { PlanDuration } from '@/types';
+
 export interface FormFinishingUpAddOn {
   title: string;
   price: string;
@@ -7,7 +9,7 @@ export interface FormFinishingUpAddOn {
 interface FormFinishingUpProps {
   planName: string;
   planPrice: string;
-  planDuration: string;
+  planDuration: PlanDuration;
   addOns: FormFinishingUpAddOn[];
   totalPrice: string;
   onChangePlan: () => void;
@@ -21,7 +23,7 @@ defineProps<FormFinishingUpProps>();
     <div class="finishing-up-info">
       <div class="finishing-plan">
         <div class="plan-info">
-          <p class="plan-title">{{ planName }} (Monthly)</p>
+          <p class="plan-title">{{ planName }}</p>
           <button type="button" @click="onChangePlan" class="plan-change-btn">
             Change
           </button>
@@ -42,7 +44,9 @@ defineProps<FormFinishingUpProps>();
     </div>
 
     <div class="finishing-up-total">
-      <p class="finishing-up-total-title">Total (per month)</p>
+      <p class="finishing-up-total-title">
+        Total (per {{ planDuration === 'monthly' ? 'month' : 'year' }})
+      </p>
       <span class="finishing-up-total-price">{{ totalPrice }}</span>
     </div>
   </div>

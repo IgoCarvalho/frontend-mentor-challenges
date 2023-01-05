@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { ErrorMessage, Form } from 'vee-validate';
+import { ErrorMessage, useForm } from 'vee-validate';
 import * as yup from 'yup';
 
 import AppButton from './AppButton.vue';
@@ -18,7 +18,7 @@ import type { PlanDuration } from '@/types';
 import { plans, addOns } from '@/data';
 
 const planDuration = ref<PlanDuration>('monthly');
-const formStep = ref(1);
+const formStep = ref(0);
 const slideDirection = ref<'left' | 'right'>('left');
 const formSteps = ['Your info', 'Select plan', 'Add-ons', 'Summary'];
 
@@ -50,11 +50,6 @@ watch(formStep, (actualStep, oldStep) => {
   setSlideDirection(slideToNextStep);
 });
 
-const formAddOns: FormFinishingUpAddOn[] = [
-  { title: 'Online service', price: '+$1/mo' },
-  { title: 'Large storage', price: '+$2/mo' },
-];
-
 function nextStep() {
   formStep.value += 1;
 }
@@ -72,7 +67,7 @@ function formConfirmation() {
 }
 
 function navigateToPlanStep() {
-  const planStep = 2;
+  const planStep = 1;
 
   goToStep(planStep);
 }
@@ -80,18 +75,84 @@ function navigateToPlanStep() {
 function setSlideDirection(slidingToNextStep: boolean) {
   slideDirection.value = slidingToNextStep ? 'left' : 'right';
 }
+
+interface FormFields {
+  name: string;
+  email: string;
+  phone: string;
+  plan: string;
+  'add-ons'?: string[];
+}
+
+const { meta, handleSubmit, values } = useForm<FormFields>({
+  validationSchema: currentSchema,
+  keepValuesOnUnmount: true,
+});
+
+const onSubmit = handleSubmit((values) => {
+  console.log({ values });
+  nextStep();
+});
+
+const selectedAddOns = computed(() => {
+  const selectedPlan = plans.find((p) => p.id === values.plan);
+
+  if (!selectedPlan) return;
+
+  const planDurationFullName =
+    planDuration.value === 'monthly' ? 'Monthly' : 'Yearly';
+
+  const planName = `${selectedPlan?.name} (${planDurationFullName})`;
+  const planPrice = selectedPlan?.price[planDuration.value].text;
+
+  interface SelectedAddonsData {
+    addOnsData: FormFinishingUpAddOn[];
+    addOnsTotalPrice: number;
+  }
+
+  const selectedAddOnsIndexes = values['add-ons']?.map((addOn) => {
+    return addOns.findIndex((a) => a.id === addOn);
+  });
+
+  const selectedAddOnsData = selectedAddOnsIndexes?.reduce<SelectedAddonsData>(
+    (acc, addOnIndex) => {
+      const addOnData: FormFinishingUpAddOn = {
+        title: addOns[addOnIndex].name,
+        price: addOns[addOnIndex].price[planDuration.value].text,
+      };
+
+      const addOnPrice = addOns[addOnIndex].price[planDuration.value].value;
+
+      return {
+        addOnsData: [...(acc.addOnsData || []), addOnData],
+        addOnsTotalPrice: (acc.addOnsTotalPrice || 0) + addOnPrice,
+      };
+    },
+    {} as SelectedAddonsData
+  );
+
+  const totalPrice =
+    selectedPlan.price[planDuration.value].value +
+    (selectedAddOnsData?.addOnsTotalPrice || 0);
+
+  const totalPriceText =
+    planDuration.value === 'monthly'
+      ? `+$${totalPrice}/mo`
+      : `$${totalPrice}/yr`;
+
+  return {
+    planName,
+    planPrice,
+    addOns: selectedAddOnsData?.addOnsData,
+    totalPrice: totalPriceText,
+  };
+});
 </script>
 
 <template>
   <FormStepper :stepsLabel="formSteps" :currentStep="formStep" />
 
-  <Form
-    v-slot="{ meta }"
-    class="form"
-    @submit="nextStep"
-    keep-values
-    :validation-schema="currentSchema"
-  >
+  <form class="form" @submit="onSubmit">
     <Transition mode="out-in" :name="`slide-${slideDirection}`">
       <FormSection
         v-if="formStep === 0"
@@ -182,11 +243,11 @@ function setSlideDirection(slidingToNextStep: boolean) {
       >
         <div class="finishing-up-container">
           <FormFinishingUp
-            planName="Arcade"
-            planPrice="$9/mo"
-            planDuration="mo"
-            :addOns="formAddOns"
-            totalPrice="+$12/mo"
+            :planName="selectedAddOns?.planName || ''"
+            :planPrice="selectedAddOns?.planPrice || ''"
+            :planDuration="planDuration"
+            :addOns="selectedAddOns?.addOns || []"
+            :totalPrice="selectedAddOns?.totalPrice || ''"
             :onChangePlan="navigateToPlanStep"
           />
         </div>
@@ -206,7 +267,7 @@ function setSlideDirection(slidingToNextStep: boolean) {
         Confirm
       </AppButton>
     </div>
-  </Form>
+  </form>
 </template>
 
 <style scoped>

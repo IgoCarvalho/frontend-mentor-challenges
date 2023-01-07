@@ -25,6 +25,7 @@ defineProps<FormSectionProps>();
   color: var(--color-text);
   font-weight: 700;
   margin-bottom: 1.6rem;
+  padding-top: 1px;
 }
 
 .form-section-subtitle {

@@ -4,7 +4,7 @@ import ThanksIcon from './icons/ThanksIcon.vue';
 
 <template>
   <div class="thanks">
-    <ThanksIcon />
+    <ThanksIcon class="thanks-icon" />
     <p class="thanks-title">Thank you!</p>
     <span class="thanks-text">
       Thanks for confirming your subscription! We hope you have fun using our
@@ -36,5 +36,27 @@ import ThanksIcon from './icons/ThanksIcon.vue';
   font-size: 1.6rem;
   margin-top: 1.6rem;
   text-align: center;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 425px) {
+  .thanks {
+    padding-top: 4.8rem;
+    padding-bottom: 4.7rem;
+  }
+
+  .thanks-icon {
+    width: 5.6rem;
+    height: 5.6rem;
+  }
+
+  .thanks-title {
+    font-size: 2.4rem;
+    margin-top: 2.3rem;
+  }
+
+  .thanks-text {
+    margin-top: 1.1rem;
+  }
 }
 </style>

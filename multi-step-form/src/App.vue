@@ -36,7 +36,7 @@ main {
   .container {
     background-color: initial;
     padding: 1.6rem;
-    padding-top: 10rem;
+    padding-top: 9.9rem;
     z-index: 10;
   }
 }

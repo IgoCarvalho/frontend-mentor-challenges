@@ -179,7 +179,7 @@ const selectedAddOns = computed(() => {
       <FormSection
         v-else-if="formStep === 1"
         title="Select your plan"
-        subtitle="Add-ons help enhance your game experience."
+        subtitle="You have the option of monthly or yearly billing."
       >
         <div class="form-radio-box-container">
           <InputRadioBox
@@ -379,7 +379,12 @@ const selectedAddOns = computed(() => {
 
   .form-radio-box-container {
     flex-direction: column;
-    margin-top: 2.5rem;
+    margin-top: 2.2rem;
+    gap: 1.2rem;
+  }
+
+  .plan-duration-selection-container {
+    margin-top: 2.4rem;
   }
 
   .add-ons-selection-container {

@@ -55,14 +55,13 @@ input:checked ~ .switch-handler::before {
 .switch {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.4rem;
   font-size: 1.4rem;
   font-weight: 500;
 }
 
 .switch-handler {
-  /* padding: 1rem; */
-  width: 4rem;
+  width: 3.8rem;
   height: 2rem;
   display: inline-block;
   border-radius: 1rem;

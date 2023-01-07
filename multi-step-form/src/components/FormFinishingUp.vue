@@ -47,7 +47,7 @@ defineProps<FormFinishingUpProps>();
       <p class="finishing-up-total-title">
         Total (per {{ planDuration === 'monthly' ? 'month' : 'year' }})
       </p>
-      <span class="finishing-up-total-price">{{ totalPrice }}</span>
+      <strong class="finishing-up-total-price">{{ totalPrice }}</strong>
     </div>
   </div>
 </template>
@@ -139,5 +139,38 @@ defineProps<FormFinishingUpProps>();
   font-size: 2rem;
   font-weight: 700;
   color: var(--color-finishing-total-price);
+}
+
+@media screen and (max-width: 425px) {
+  .finishing-up-info {
+    padding: 1.9rem 1.6rem 1.7rem;
+  }
+
+  .finishing-plan {
+    padding-bottom: 1.3rem;
+  }
+
+  .plan-info {
+    gap: 0.3rem;
+  }
+
+  .plan-title,
+  .plan-price {
+    font-size: 1.4rem;
+  }
+
+  .finishing-add-ons {
+    margin-top: 1.5rem;
+    gap: 1.6rem;
+  }
+
+  .finishing-up-total {
+    padding: 0 1.6rem;
+    margin-top: 2.7rem;
+  }
+
+  .finishing-up-total-price {
+    font-size: 1.6rem;
+  }
 }
 </style>

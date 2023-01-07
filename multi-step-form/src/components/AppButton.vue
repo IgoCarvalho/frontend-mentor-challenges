@@ -55,5 +55,9 @@ withDefaults(defineProps<AppButtonProps>(), {
     padding: 1.2rem 1.6rem;
     border-radius: 0.4rem;
   }
+
+  .btn.btn--secondary {
+    padding: 1.2rem 2.2rem;
+  }
 }
 </style>

@@ -67,17 +67,36 @@ const { errorMessage, value } = useField(nameRef);
   font-weight: 500;
   padding: 1.6rem;
   border-radius: 0.8rem;
-  border: 1px solid var(--color-input-border);
-  outline: none;
+  border: none;
+  outline: 1px solid var(--color-input-border);
+  outline-offset: -1px;
 }
 .input-base-error {
   border-color: var(--color-input-error);
 }
 .input-base::placeholder {
+  letter-spacing: 0.03em;
   color: var(--color-input-placeholder);
 }
 .input-base:focus,
 .input-base:hover {
-  border-color: var(--color-input-border-active);
+  outline-color: var(--color-input-border-active);
+}
+
+@media screen and (max-width: 425px) {
+  .input-container {
+    gap: 0.4rem;
+  }
+
+  .input-base {
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.4rem;
+  }
+
+  .input-label,
+  .input-error-message {
+    font-size: 1.2rem;
+  }
 }
 </style>

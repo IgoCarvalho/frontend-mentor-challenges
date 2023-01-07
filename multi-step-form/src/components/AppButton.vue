@@ -40,12 +40,20 @@ withDefaults(defineProps<AppButtonProps>(), {
   background-color: var(--color-btn-secondary-hover);
 }
 
-.btn--transparent {
+.btn.btn--transparent {
   background-color: transparent;
   color: var(--color-text-muted);
   padding-left: 0;
 }
-.btn--transparent:hover {
+.btn.btn--transparent:hover {
   color: var(--color-text);
+}
+
+@media screen and (max-width: 425px) {
+  .btn {
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.4rem;
+  }
 }
 </style>

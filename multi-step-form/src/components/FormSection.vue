@@ -34,11 +34,11 @@ defineProps<FormSectionProps>();
 @media screen and (max-width: 425px) {
   .form-section-title {
     font-size: 2.4rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.1rem;
   }
 
   .form-section-subtitle {
-    line-height: 1.2;
+    line-height: 1.5;
   }
 }
 </style>

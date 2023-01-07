@@ -156,7 +156,7 @@ const selectedAddOns = computed(() => {
     <Transition mode="out-in" :name="`slide-${slideDirection}`">
       <FormSection
         v-if="formStep === 0"
-        title="Personal Info"
+        title="Personal info"
         subtitle="Please provide your name, email address, and phone number."
       >
         <div class="form-inputs-container">
@@ -368,9 +368,13 @@ const selectedAddOns = computed(() => {
   .form {
     position: initial;
     align-self: flex-start;
-    padding: 3.1rem 2.4rem;
+    padding: 3.1rem 2.4rem 3.2rem;
     border-radius: 0.8rem;
     background-color: var(--color-foreground);
+  }
+
+  .form-inputs-container {
+    margin-top: 2.2rem;
   }
 
   .form-radio-box-container {
@@ -383,6 +387,7 @@ const selectedAddOns = computed(() => {
   }
 
   .form-action-buttons {
+    position: fixed;
     bottom: 0;
     padding: 1.6rem;
     background-color: var(--color-foreground);

@@ -60,8 +60,8 @@ const currentStepIndex = computed(() => {
 }
 
 .step-counter {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3.3rem;
+  height: 3.3rem;
   background-color: transparent;
   color: var(--color-white);
   border: 1px solid var(--color-white);
@@ -99,7 +99,7 @@ const currentStepIndex = computed(() => {
     left: 0;
     width: 100%;
     min-height: 17.2rem;
-    padding: 3.2rem 10rem;
+    padding: 3.2rem 9.8rem;
     flex-direction: initial;
     justify-content: space-between;
     align-items: flex-start;

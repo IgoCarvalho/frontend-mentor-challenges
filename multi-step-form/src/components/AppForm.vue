@@ -388,7 +388,8 @@ const selectedAddOns = computed(() => {
   }
 
   .add-ons-selection-container {
-    margin-top: 2.5rem;
+    margin-top: 2.2rem;
+    gap: 1.2rem;
   }
 
   .form-action-buttons {

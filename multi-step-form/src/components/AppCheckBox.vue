@@ -84,7 +84,8 @@ input {
   align-items: center;
   gap: 2.2rem;
   padding: 2rem 2.4rem;
-  border: 1px solid var(--color-check-border);
+  outline: 1px solid var(--color-check-border);
+  outline-offset: -1px;
   border-radius: 0.8rem;
   cursor: pointer;
   transition: 300ms;
@@ -95,13 +96,14 @@ input {
   width: 2rem;
   height: 2rem;
   border-radius: 0.4rem;
-  border: 1px solid var(--color-check-border);
+  outline: 1px solid var(--color-check-border);
+  outline-offset: -1px;
 }
 
 .check::after {
   position: absolute;
   left: 2.4rem;
-  border: 1px solid var(--color-check-border-active);
+  outline-color: var(--color-check-border-active);
   background-color: var(--color-check-border-active);
   background-image: url('@/assets/images/icon-checkmark.svg');
   background-repeat: no-repeat;
@@ -117,7 +119,7 @@ input:checked + .check::after {
 
 .check:hover,
 input:checked + .check {
-  border-color: var(--color-check-border-active);
+  outline-color: var(--color-check-border-active);
 }
 input:checked + .check {
   background-color: var(--color-check-active-bg);
@@ -153,7 +155,7 @@ input:checked + .check {
 
 @media screen and (max-width: 425px) {
   .check {
-    padding: 1.6rem;
+    padding: 1.4rem 1.6rem;
     gap: 1.6rem;
   }
   .check::after {
@@ -161,11 +163,15 @@ input:checked + .check {
   }
 
   .check-info {
-    gap: 0.8rem;
+    gap: 0.4rem;
   }
 
   .check-title {
     font-size: 1.4rem;
+  }
+
+  .check-subtitle {
+    line-height: 1.4rem;
   }
 
   .check-subtitle,

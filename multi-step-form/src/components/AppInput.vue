@@ -43,7 +43,7 @@ const { errorMessage, value } = useField(nameRef);
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .input-info {
@@ -65,17 +65,17 @@ const { errorMessage, value } = useField(nameRef);
   color: var(--color-text);
   font-size: 1.6rem;
   font-weight: 500;
-  padding: 1.6rem;
+  padding: 1.5rem 1.6rem;
   border-radius: 0.8rem;
   border: none;
   outline: 1px solid var(--color-input-border);
   outline-offset: -1px;
+  width: 100%;
 }
 .input-base-error {
   border-color: var(--color-input-error);
 }
 .input-base::placeholder {
-  letter-spacing: 0.03em;
   color: var(--color-input-placeholder);
 }
 .input-base:focus,
@@ -92,6 +92,9 @@ const { errorMessage, value } = useField(nameRef);
     font-size: 1.4rem;
     padding: 1.2rem 1.6rem;
     border-radius: 0.4rem;
+  }
+  .input-base::placeholder {
+    letter-spacing: 0.03em;
   }
 
   .input-label,

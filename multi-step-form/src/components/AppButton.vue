@@ -16,7 +16,7 @@ withDefaults(defineProps<AppButtonProps>(), {
 
 <style scoped>
 .btn {
-  padding: 1.6rem 2.6rem;
+  padding: 1.5rem 2.5rem;
   font-weight: 500;
   font-size: 1.6rem;
   border: none;

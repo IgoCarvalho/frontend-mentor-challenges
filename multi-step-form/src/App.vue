@@ -34,9 +34,12 @@ main {
   }
 
   .container {
+    align-self: flex-start;
     background-color: initial;
     padding: 1.6rem;
     padding-top: 9.9rem;
+    padding-bottom: 9rem;
+    box-shadow: none;
     z-index: 10;
   }
 }

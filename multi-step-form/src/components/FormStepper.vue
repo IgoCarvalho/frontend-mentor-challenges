@@ -47,7 +47,7 @@ const currentStepIndex = computed(() => {
   background-size: cover;
   min-height: 568px;
   min-width: 274px;
-  padding: 3.2rem;
+  padding: 4rem 3.2rem;
   border-radius: 1rem;
   overflow: hidden;
   text-transform: uppercase;
@@ -80,16 +80,22 @@ const currentStepIndex = computed(() => {
   border-color: var(--color-active-step-marker);
 }
 
+.step-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .step-subtitle {
-  display: inline-block;
   color: var(--color-step-text-muted);
   font-size: 1.2rem;
-  margin-bottom: 0.6rem;
+  line-height: 1.4rem;
 }
 .step-title {
+  margin-top: 0.3rem;
   color: var(--color-white);
   font-weight: 700;
   font-size: 1.4rem;
+  letter-spacing: 0.07em;
 }
 
 @media screen and (max-width: 425px) {
@@ -106,7 +112,6 @@ const currentStepIndex = computed(() => {
     gap: initial;
     background-image: url('@/assets/images/bg-sidebar-mobile.svg');
     border-radius: 0;
-    z-index: -1;
   }
 
   .step-info {

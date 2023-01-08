@@ -310,8 +310,8 @@ const selectedAddOns = computed(() => {
 .form-inputs-container {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
-  margin-top: 4rem;
+  gap: 2.4rem;
+  margin-top: 4.1rem;
 }
 
 .error-message-container {
@@ -366,15 +366,17 @@ const selectedAddOns = computed(() => {
 
 @media screen and (max-width: 425px) {
   .form {
-    position: initial;
     align-self: flex-start;
     padding: 3.1rem 2.4rem 3.2rem;
     border-radius: 0.8rem;
     background-color: var(--color-foreground);
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+    z-index: 10;
   }
 
   .form-inputs-container {
     margin-top: 2.2rem;
+    gap: 1.6rem;
   }
 
   .form-radio-box-container {

@@ -5,18 +5,32 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { toRef } from 'vue';
+import { toRef, watch } from 'vue';
 import { useField } from 'vee-validate';
 
 interface AppInputProps {
   name: string;
   label: string;
+  type?: string;
 }
 
 const props = defineProps<AppInputProps>();
 
 const nameRef = toRef(props, 'name');
-const { errorMessage, value } = useField(nameRef);
+const { errorMessage, value, handleChange } = useField(nameRef);
+
+watch(value, (newValue) => {
+  if (props.type === 'tel') {
+    let parsedText = String(newValue);
+    parsedText = parsedText.replace(/\D/g, '');
+    parsedText = parsedText.replace(/^(\d\d)(\d)/g, '$1) $2');
+    parsedText = parsedText.replace(/(\d{5})(\d)/, '$1-$2');
+    if (parsedText.length > 0) {
+      parsedText = `(${parsedText}`;
+    }
+    handleChange(parsedText.slice(0, 15), false);
+  }
+});
 </script>
 
 <template>
@@ -32,7 +46,7 @@ const { errorMessage, value } = useField(nameRef);
       :class="{ 'input-base-error': errorMessage }"
       :id="name"
       :name="name"
-      type="text"
+      :type="type"
       v-bind="$attrs"
       v-model="value"
     />

@@ -27,7 +27,10 @@ const formSchema = [
   yup.object({
     name: yup.string().required().min(3),
     email: yup.string().required().email(),
-    phone: yup.string().required(),
+    phone: yup
+      .string()
+      .matches(/^\(\d{2}\) \d{4,5}-\d{4}$/, 'Invalid phone number')
+      .required(),
   }),
   yup.object({
     plan: yup.string().required('Choose a plan'),
@@ -170,8 +173,8 @@ const selectedAddOns = computed(() => {
           <AppInput
             name="phone"
             label="Phone Number"
-            type="phone"
-            placeholder="e.g. +1 234 567 890"
+            type="tel"
+            placeholder="e.g. (12) 34567-8901"
           />
         </div>
       </FormSection>

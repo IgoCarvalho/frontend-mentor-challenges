@@ -2,7 +2,9 @@
 
 ![Header](./.github/readme-header.png)
 
-> Essa é minha solução para o [desafio Multi-step form do site Frontend Mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ).
+## Essa é minha solução para o [desafio Multi-step form do site Frontend Mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ).
+
+> Você pode acessar o site desenvolvido através deste [**Link.**](https://igo-multi-step-form.netlify.app/)
 
 ## :sparkles: O desafio
 

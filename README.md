@@ -11,3 +11,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?&style=flat&logo=typescript&logoColor=white)&nbsp;
 
 ---
+
+### Interactive Comments Section
+
+> Link em breve

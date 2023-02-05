@@ -1,16 +1,22 @@
 import { MessageBox } from '../MessageBox';
+
+import { MessageData } from '../../types/message';
+
 import { Container, RepliesList } from './styles';
 
-export function MessageReplies() {
+interface MessageRepliesProps {
+  replies: MessageData['replies'];
+}
+
+export function MessageReplies({ replies }: MessageRepliesProps) {
   return (
     <Container>
       <RepliesList>
-        <li>
-          <MessageBox />
-        </li>
-        <li>
-          <MessageBox />
-        </li>
+        {replies.map((reply) => (
+          <li>
+            <MessageBox key={reply.id} message={reply} />
+          </li>
+        ))}
       </RepliesList>
     </Container>
   );

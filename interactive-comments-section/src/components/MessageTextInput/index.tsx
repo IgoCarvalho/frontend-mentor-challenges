@@ -10,7 +10,7 @@ export function MessageTextInput() {
 
   return (
     <Container>
-      <UserImage src="/avatars/image-juliusomo.webp" alt="juliusomo avatar" />
+      <UserImage src="/images/avatars/image-juliusomo.webp" alt="juliusomo avatar" />
 
       <TextArea
         name="message-text"

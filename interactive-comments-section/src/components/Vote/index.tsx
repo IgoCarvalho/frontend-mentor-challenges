@@ -5,8 +5,12 @@ import { PlusIcon } from '../icons/PlusIcon';
 
 import { Container, Counter, VoteButton } from './styles';
 
-export function Vote() {
-  const [voteCounter, setVoteCounter] = useState(0);
+interface VoteProps {
+  value: number;
+}
+
+export function Vote({ value }: VoteProps) {
+  const [voteCounter, setVoteCounter] = useState(value ?? 0);
 
   function upVote() {
     setVoteCounter(voteCounter + 1);

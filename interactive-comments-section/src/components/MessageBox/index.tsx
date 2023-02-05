@@ -1,6 +1,8 @@
 import { ReplyIcon } from '../icons/ReplyIcon';
 import { Vote } from '../Vote';
 
+import { MessageData } from '../../types/message';
+
 import {
   Container,
   Content,
@@ -10,23 +12,23 @@ import {
   ReplyButton,
 } from './styles';
 
-export function MessageBox() {
+interface MessageBoxProps {
+  message: MessageData;
+}
+
+export function MessageBox({ message }: MessageBoxProps) {
   return (
     <Container>
-      <Vote />
+      <Vote value={message.score} />
 
       <Content>
         <MessageHeader>
-          <img src="/avatars/image-amyrobson.webp" alt="User avatar" />
-          <strong>amyrobson</strong>
-          <span>1 month ago</span>
+          <img src={message.user.image.webp} alt={`${message.user.username} avatar`} />
+          <strong>{message.user.username}</strong>
+          <span>{message.createdAt}</span>
         </MessageHeader>
 
-        <MessageText>
-          Impressive! Though it seems the drag feature could be improved. But overall it looks
-          incredible. You&apos;ve nailed the design and the responsiveness at various breakpoints
-          works really well.
-        </MessageText>
+        <MessageText>{message.content}</MessageText>
       </Content>
 
       <ActionsButtons>

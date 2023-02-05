@@ -1,12 +1,46 @@
-import { useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import { Button } from '../Button';
 import { TextArea } from '../TextArea';
 
 import { Container, UserImage } from './styles';
 
-export function MessageTextInput() {
-  const [messageText, setMessageText] = useState('');
+interface MessageTextInputProps {
+  value?: string;
+  onChange?: (text: string) => void;
+  onSend?: () => void;
+  isReplying?: boolean;
+  isEditing?: boolean;
+  autoFocus?: boolean;
+}
+
+export function MessageTextInput({
+  value,
+  onChange,
+  onSend,
+  isEditing = false,
+  isReplying = false,
+  autoFocus = false,
+}: MessageTextInputProps) {
+  function handleClick() {
+    if (onSend) {
+      onSend();
+    }
+  }
+
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    if (onChange) {
+      onChange(event.target.value);
+    }
+  }
+
+  function getButtonText() {
+    if (isEditing) return 'Update';
+    if (isReplying) return 'Reply';
+    return 'Send';
+  }
+
+  const buttonText = getButtonText();
 
   return (
     <Container>
@@ -14,12 +48,13 @@ export function MessageTextInput() {
 
       <TextArea
         name="message-text"
-        value={messageText}
-        onChange={setMessageText}
+        value={value}
+        onChange={handleChange}
         placeholder="Add a comment..."
+        autoFocus={autoFocus}
       />
 
-      <Button>Send</Button>
+      <Button onClick={handleClick}>{buttonText}</Button>
     </Container>
   );
 }

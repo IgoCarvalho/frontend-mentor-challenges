@@ -1,15 +1,10 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from 'react';
 
 import { Container } from './styles';
 
-interface TextAreaProps {
-  name: string;
-  value: string;
-  placeholder: string;
-  onChange: (text: string) => void;
-}
+type TextAreaProps = InputHTMLAttributes<HTMLTextAreaElement>;
 
-export function TextArea({ onChange, ...props }: TextAreaProps) {
+export function TextArea({ onChange, autoFocus, ...props }: TextAreaProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -18,8 +13,18 @@ export function TextArea({ onChange, ...props }: TextAreaProps) {
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }
 
-    onChange(event.target.value);
+    if (onChange) {
+      onChange(event);
+    }
   }
+
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+      const textSize = inputRef.current?.value.length ?? 0;
+      inputRef.current?.setSelectionRange(textSize, textSize);
+    }
+  }, []);
 
   return (
     <Container>

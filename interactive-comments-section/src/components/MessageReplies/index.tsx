@@ -13,8 +13,8 @@ export function MessageReplies({ replies }: MessageRepliesProps) {
     <Container>
       <RepliesList>
         {replies.map((reply) => (
-          <li>
-            <MessageBox key={reply.id} message={reply} />
+          <li key={reply.id}>
+            <MessageBox message={reply} />
           </li>
         ))}
       </RepliesList>

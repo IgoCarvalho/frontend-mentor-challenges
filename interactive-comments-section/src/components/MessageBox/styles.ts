@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
+export const Box = styled.div`
   width: 100%;
   padding: 2.4rem;
   border-radius: 1rem;

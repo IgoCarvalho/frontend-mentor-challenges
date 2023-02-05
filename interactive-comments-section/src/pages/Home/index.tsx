@@ -1,9 +1,10 @@
+import { MessageBox } from '../../components/MessageBox';
 import { Container } from './styles';
 
 export function Home() {
   return (
     <Container>
-      <h1>Home</h1>
+      <MessageBox />
     </Container>
   );
 }

@@ -51,4 +51,9 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
 `;

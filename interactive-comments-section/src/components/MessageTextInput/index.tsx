@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { useUser } from '../../hooks/useUser';
 
 import { Button } from '../Button';
 import { TextArea } from '../TextArea';
@@ -22,6 +23,8 @@ export function MessageTextInput({
   isReplying = false,
   autoFocus = false,
 }: MessageTextInputProps) {
+  const { user } = useUser();
+
   function handleClick() {
     if (onSend) {
       onSend();
@@ -44,7 +47,7 @@ export function MessageTextInput({
 
   return (
     <Container>
-      <UserImage src="/images/avatars/image-juliusomo.webp" alt="juliusomo avatar" />
+      <UserImage src={user.image?.webp || ''} alt={`${user.username} avatar`} />
 
       <TextArea
         name="message-text"

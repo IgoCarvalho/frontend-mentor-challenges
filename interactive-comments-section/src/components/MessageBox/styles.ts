@@ -44,6 +44,14 @@ export const MessageHeader = styled.div`
   }
 `;
 
+export const CurrentUserTag = styled.div`
+  background-color: var(--moderate-blue);
+  color: var(--white);
+
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.2rem;
+`;
+
 export const MessageText = styled.p`
   color: var(--grayish-blue);
   line-height: 1.4;
@@ -51,6 +59,7 @@ export const MessageText = styled.p`
 
 export const ActionsButtons = styled.div`
   display: flex;
+  gap: 1.6rem;
 
   position: absolute;
   top: 2.4rem;
@@ -75,4 +84,12 @@ const ActionButton = styled.button`
 
 export const ReplyButton = styled(ActionButton)`
   color: var(--moderate-blue);
+`;
+
+export const EditButton = styled(ActionButton)`
+  color: var(--moderate-blue);
+`;
+
+export const DeleteButton = styled(ActionButton)`
+  color: var(--soft-red);
 `;

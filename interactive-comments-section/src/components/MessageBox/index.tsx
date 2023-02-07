@@ -13,8 +13,15 @@ import {
   ActionsButtons,
   ReplyButton,
   Container,
+  DeleteButton,
+  EditButton,
+  CurrentUserTag,
 } from './styles';
+
 import { MessageTextInput } from '../MessageTextInput';
+import { DeleteIcon } from '../icons/DeleteIcon';
+import { EditIcon } from '../icons/EditIcon';
+import { useUser } from '../../hooks/useUser';
 
 interface MessageBoxProps {
   message: MessageData;
@@ -25,6 +32,8 @@ export function MessageBox({ message }: MessageBoxProps) {
   const [isReplying, setIsReplying] = useState(false);
 
   const [replyText, setReplyText] = useState('');
+
+  const { isCurrentUser } = useUser();
 
   function handleReplyButton() {
     if (!isReplying) {
@@ -47,6 +56,9 @@ export function MessageBox({ message }: MessageBoxProps) {
           <MessageHeader>
             <img src={message.user.image.webp} alt={`${message.user.username} avatar`} />
             <strong>{message.user.username}</strong>
+
+            {isCurrentUser(message.user) && <CurrentUserTag>you</CurrentUserTag>}
+
             <span>{message.createdAt}</span>
           </MessageHeader>
 
@@ -54,10 +66,24 @@ export function MessageBox({ message }: MessageBoxProps) {
         </Content>
 
         <ActionsButtons>
-          <ReplyButton onClick={handleReplyButton}>
-            <ReplyIcon />
-            Reply
-          </ReplyButton>
+          {isCurrentUser(message.user) ? (
+            <>
+              <DeleteButton>
+                <DeleteIcon />
+                Delete
+              </DeleteButton>
+
+              <EditButton>
+                <EditIcon />
+                Edit
+              </EditButton>
+            </>
+          ) : (
+            <ReplyButton onClick={handleReplyButton}>
+              <ReplyIcon />
+              Reply
+            </ReplyButton>
+          )}
         </ActionsButtons>
       </Box>
 

@@ -9,7 +9,7 @@ export function TextArea({ onChange, autoFocus, ...props }: TextAreaProps) {
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
     if (inputRef.current) {
-      inputRef.current.style.removeProperty('height');
+      inputRef.current.style.height = 'auto';
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }
 

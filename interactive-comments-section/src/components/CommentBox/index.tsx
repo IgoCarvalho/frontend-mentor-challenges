@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { ReplyIcon } from '../icons/ReplyIcon';
 import { Vote } from '../Vote';
@@ -16,12 +16,15 @@ import {
   CommentHeader,
   CommentText,
   ReplyButton,
+  EditCommentBox,
 } from './styles';
 
 import { useUser } from '../../hooks/useUser';
 import { DeleteIcon } from '../icons/DeleteIcon';
 import { EditIcon } from '../icons/EditIcon';
 import { CommentTextInput } from '../CommentTextInput';
+import { TextArea } from '../TextArea';
+import { Button } from '../Button';
 
 interface CommentBoxProps {
   comment: CommentData;
@@ -32,6 +35,7 @@ export function CommentBox({ comment }: CommentBoxProps) {
   const [isReplying, setIsReplying] = useState(false);
 
   const [replyText, setReplyText] = useState('');
+  const [commentText, setCommentText] = useState('');
 
   const { isCurrentUser } = useUser();
 
@@ -45,6 +49,22 @@ export function CommentBox({ comment }: CommentBoxProps) {
 
   function handleReplySubmit() {
     console.log(replyText);
+  }
+
+  function handleEditButton() {
+    if (!isEditing) {
+      setCommentText(comment.content);
+    }
+
+    setIsEditing(!isEditing);
+  }
+
+  function handleEditComment(event: ChangeEvent<HTMLTextAreaElement>) {
+    setCommentText(event.target.value);
+  }
+
+  function handleEditSubmit() {
+    console.log(commentText);
   }
 
   return (
@@ -62,7 +82,21 @@ export function CommentBox({ comment }: CommentBoxProps) {
             <span>{comment.createdAt}</span>
           </CommentHeader>
 
-          <CommentText>{comment.content}</CommentText>
+          {isEditing ? (
+            <EditCommentBox>
+              <TextArea
+                name="comment-edit"
+                value={commentText}
+                onChange={handleEditComment}
+                placeholder="Add a comment..."
+                autoFocus
+              />
+
+              <Button onClick={handleEditSubmit}>Update</Button>
+            </EditCommentBox>
+          ) : (
+            <CommentText>{comment.content}</CommentText>
+          )}
         </Content>
 
         <ActionsButtons>
@@ -73,7 +107,7 @@ export function CommentBox({ comment }: CommentBoxProps) {
                 Delete
               </DeleteButton>
 
-              <EditButton>
+              <EditButton onClick={handleEditButton}>
                 <EditIcon />
                 Edit
               </EditButton>

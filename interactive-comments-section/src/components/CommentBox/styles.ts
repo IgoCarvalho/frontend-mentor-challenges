@@ -94,3 +94,10 @@ export const EditButton = styled(ActionButton)`
 export const DeleteButton = styled(ActionButton)`
   color: var(--soft-red);
 `;
+
+export const EditCommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.6rem;
+`;

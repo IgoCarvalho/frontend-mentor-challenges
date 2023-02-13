@@ -19,6 +19,7 @@ export const Container = styled.label`
     color: var(--grayish-blue);
     line-height: 1.4;
     border: 0;
+    overflow: hidden;
     resize: none;
     outline: none;
   }

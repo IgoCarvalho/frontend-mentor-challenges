@@ -1,9 +1,13 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 
 import { CommentData } from '../types/comment';
+import { User } from '../types/user';
+
+import * as storageService from '../services/storageService';
 
 interface CommentsContextData {
   comments: CommentData[];
+  createComment: (author: User, text: string) => void;
 }
 
 const CommentsContext = createContext<CommentsContextData>({} as CommentsContextData);
@@ -21,7 +25,13 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
       .then((commentRes) => setComments(commentRes.comments));
   }, []);
 
-  const context = useMemo(() => ({ comments }), [comments]);
+  function createComment(author: User, text: string) {
+    const newComment = storageService.createComment(author, text);
+
+    setComments([...comments, newComment]);
+  }
+
+  const context = useMemo<CommentsContextData>(() => ({ comments, createComment }), [comments]);
 
   return <CommentsContext.Provider value={context}>{children}</CommentsContext.Provider>;
 }

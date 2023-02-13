@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 
 import { ReplyIcon } from '../icons/ReplyIcon';
 import { Vote } from '../Vote';
@@ -90,6 +91,18 @@ export function CommentBox({ comment }: CommentBoxProps) {
     closeModal();
   }
 
+  function getFormattedDate() {
+    if (comment.id < 10) {
+      return comment.createdAt;
+    }
+
+    const date = new Date(Number(comment.createdAt));
+
+    const formattedDateText = `${formatDistanceToNowStrict(date)} ago`;
+
+    return formattedDateText;
+  }
+
   return (
     <>
       <Container>
@@ -103,7 +116,7 @@ export function CommentBox({ comment }: CommentBoxProps) {
 
               {isCurrentUser(comment.user) && <CurrentUserTag>you</CurrentUserTag>}
 
-              <span>{comment.createdAt}</span>
+              <span>{getFormattedDate()}</span>
             </CommentHeader>
 
             {isEditing ? (

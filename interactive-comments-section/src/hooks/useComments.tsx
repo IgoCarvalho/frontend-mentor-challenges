@@ -22,7 +22,10 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
   useEffect(() => {
     fetch('/data.json')
       .then((res) => res.json())
-      .then((commentRes) => setComments(commentRes.comments));
+      .then((commentRes) => {
+        const { comments: storageComments } = storageService.getComments();
+        setComments([...commentRes.comments, ...storageComments]);
+      });
   }, []);
 
   function createComment(author: User, text: string) {

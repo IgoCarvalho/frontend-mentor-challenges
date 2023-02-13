@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 
-import { User } from '../types/message';
+import { User } from '../types/user';
 
 interface UserContextData {
   user: User;

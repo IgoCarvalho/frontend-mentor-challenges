@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { Message } from '../../components/Message';
-import { MessageTextInput } from '../../components/MessageTextInput';
+import { Comment } from '../../components/Comment';
+import { CommentTextInput } from '../../components/CommentTextInput';
 
-import { MessageData } from '../../types/message';
+import { CommentData } from '../../types/comment';
 
 import { Container } from './styles';
 
 export function Home() {
-  const [data, setData] = useState<MessageData[]>([]);
+  const [data, setData] = useState<CommentData[]>([]);
 
   useEffect(() => {
     fetch('/data.json')
@@ -19,10 +19,10 @@ export function Home() {
   return (
     <Container>
       {data.map((m) => (
-        <Message key={m.id} message={m} />
+        <Comment key={m.id} comment={m} />
       ))}
 
-      <MessageTextInput />
+      <CommentTextInput />
     </Container>
   );
 }

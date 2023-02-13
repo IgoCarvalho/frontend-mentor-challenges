@@ -6,7 +6,7 @@ import { TextArea } from '../TextArea';
 
 import { Container, UserImage } from './styles';
 
-interface MessageTextInputProps {
+interface CommentTextInputProps {
   value?: string;
   onChange?: (text: string) => void;
   onSend?: () => void;
@@ -15,14 +15,14 @@ interface MessageTextInputProps {
   autoFocus?: boolean;
 }
 
-export function MessageTextInput({
+export function CommentTextInput({
   value,
   onChange,
   onSend,
   isEditing = false,
   isReplying = false,
   autoFocus = false,
-}: MessageTextInputProps) {
+}: CommentTextInputProps) {
   const { user } = useUser();
 
   function handleClick() {
@@ -50,7 +50,7 @@ export function MessageTextInput({
       <UserImage src={user.image?.webp || ''} alt={`${user.username} avatar`} />
 
       <TextArea
-        name="message-text"
+        name="comment-text"
         value={value}
         onChange={handleChange}
         placeholder="Add a comment..."

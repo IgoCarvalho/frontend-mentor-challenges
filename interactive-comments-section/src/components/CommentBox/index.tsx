@@ -3,31 +3,31 @@ import { useState } from 'react';
 import { ReplyIcon } from '../icons/ReplyIcon';
 import { Vote } from '../Vote';
 
-import { MessageData } from '../../types/message';
+import type { CommentData } from '../../types/comment';
 
 import {
-  Box,
-  Content,
-  MessageHeader,
-  MessageText,
   ActionsButtons,
-  ReplyButton,
+  Box,
   Container,
+  Content,
+  CurrentUserTag,
   DeleteButton,
   EditButton,
-  CurrentUserTag,
+  CommentHeader,
+  CommentText,
+  ReplyButton,
 } from './styles';
 
-import { MessageTextInput } from '../MessageTextInput';
+import { useUser } from '../../hooks/useUser';
 import { DeleteIcon } from '../icons/DeleteIcon';
 import { EditIcon } from '../icons/EditIcon';
-import { useUser } from '../../hooks/useUser';
+import { CommentTextInput } from '../CommentTextInput';
 
-interface MessageBoxProps {
-  message: MessageData;
+interface CommentBoxProps {
+  comment: CommentData;
 }
 
-export function MessageBox({ message }: MessageBoxProps) {
+export function CommentBox({ comment }: CommentBoxProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
 
@@ -37,7 +37,7 @@ export function MessageBox({ message }: MessageBoxProps) {
 
   function handleReplyButton() {
     if (!isReplying) {
-      setReplyText(`@${message.user.username}`);
+      setReplyText(`@${comment.user.username}`);
     }
 
     setIsReplying(!isReplying);
@@ -50,23 +50,23 @@ export function MessageBox({ message }: MessageBoxProps) {
   return (
     <Container>
       <Box>
-        <Vote value={message.score} />
+        <Vote value={comment.score} />
 
         <Content>
-          <MessageHeader>
-            <img src={message.user.image.webp} alt={`${message.user.username} avatar`} />
-            <strong>{message.user.username}</strong>
+          <CommentHeader>
+            <img src={comment.user.image.webp} alt={`${comment.user.username} avatar`} />
+            <strong>{comment.user.username}</strong>
 
-            {isCurrentUser(message.user) && <CurrentUserTag>you</CurrentUserTag>}
+            {isCurrentUser(comment.user) && <CurrentUserTag>you</CurrentUserTag>}
 
-            <span>{message.createdAt}</span>
-          </MessageHeader>
+            <span>{comment.createdAt}</span>
+          </CommentHeader>
 
-          <MessageText>{message.content}</MessageText>
+          <CommentText>{comment.content}</CommentText>
         </Content>
 
         <ActionsButtons>
-          {isCurrentUser(message.user) ? (
+          {isCurrentUser(comment.user) ? (
             <>
               <DeleteButton>
                 <DeleteIcon />
@@ -88,7 +88,7 @@ export function MessageBox({ message }: MessageBoxProps) {
       </Box>
 
       {isReplying && (
-        <MessageTextInput
+        <CommentTextInput
           value={replyText}
           onChange={setReplyText}
           onSend={handleReplySubmit}

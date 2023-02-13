@@ -28,7 +28,7 @@ export const Content = styled.div`
   gap: 1.6rem;
 `;
 
-export const MessageHeader = styled.div`
+export const CommentHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 1.6rem;
@@ -47,19 +47,20 @@ export const MessageHeader = styled.div`
 export const CurrentUserTag = styled.div`
   background-color: var(--moderate-blue);
   color: var(--white);
-
+  font-size: 1.4rem;
+  font-weight: 500;
   padding: 0.2rem 0.8rem;
   border-radius: 0.2rem;
 `;
 
-export const MessageText = styled.p`
+export const CommentText = styled.p`
   color: var(--grayish-blue);
   line-height: 1.4;
 `;
 
 export const ActionsButtons = styled.div`
   display: flex;
-  gap: 1.6rem;
+  gap: 2.4rem;
 
   position: absolute;
   top: 2.4rem;

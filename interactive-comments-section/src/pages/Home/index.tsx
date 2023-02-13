@@ -1,24 +1,16 @@
-import { useEffect, useState } from 'react';
-
 import { Comment } from '../../components/Comment';
 import { CommentTextInput } from '../../components/CommentTextInput';
 
-import { CommentData } from '../../types/comment';
+import { useComments } from '../../hooks/useComments';
 
 import { Container } from './styles';
 
 export function Home() {
-  const [data, setData] = useState<CommentData[]>([]);
-
-  useEffect(() => {
-    fetch('/data.json')
-      .then((res) => res.json())
-      .then((mess) => setData(mess.comments));
-  }, []);
+  const { comments } = useComments();
 
   return (
     <Container>
-      {data.map((m) => (
+      {comments.map((m) => (
         <Comment key={m.id} comment={m} />
       ))}
 

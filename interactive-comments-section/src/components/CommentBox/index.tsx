@@ -25,6 +25,7 @@ import { EditIcon } from '../icons/EditIcon';
 import { CommentTextInput } from '../CommentTextInput';
 import { TextArea } from '../TextArea';
 import { Button } from '../Button';
+import { Modal } from '../Modal';
 
 interface CommentBoxProps {
   comment: CommentData;
@@ -36,6 +37,8 @@ export function CommentBox({ comment }: CommentBoxProps) {
 
   const [replyText, setReplyText] = useState('');
   const [commentText, setCommentText] = useState('');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isCurrentUser } = useUser();
 
@@ -67,69 +70,106 @@ export function CommentBox({ comment }: CommentBoxProps) {
     console.log(commentText);
   }
 
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function handleDeleteButton() {
+    openModal();
+  }
+
+  function handleDeleteCancel() {
+    closeModal();
+  }
+
+  function handleDeleteConfirm() {
+    console.log('Delete comment');
+    closeModal();
+  }
+
   return (
-    <Container>
-      <Box>
-        <Vote value={comment.score} />
+    <>
+      <Container>
+        <Box>
+          <Vote value={comment.score} />
 
-        <Content>
-          <CommentHeader>
-            <img src={comment.user.image.webp} alt={`${comment.user.username} avatar`} />
-            <strong>{comment.user.username}</strong>
+          <Content>
+            <CommentHeader>
+              <img src={comment.user.image.webp} alt={`${comment.user.username} avatar`} />
+              <strong>{comment.user.username}</strong>
 
-            {isCurrentUser(comment.user) && <CurrentUserTag>you</CurrentUserTag>}
+              {isCurrentUser(comment.user) && <CurrentUserTag>you</CurrentUserTag>}
 
-            <span>{comment.createdAt}</span>
-          </CommentHeader>
+              <span>{comment.createdAt}</span>
+            </CommentHeader>
 
-          {isEditing ? (
-            <EditCommentBox>
-              <TextArea
-                name="comment-edit"
-                value={commentText}
-                onChange={handleEditComment}
-                placeholder="Add a comment..."
-                autoFocus
-              />
+            {isEditing ? (
+              <EditCommentBox>
+                <TextArea
+                  name="comment-edit"
+                  value={commentText}
+                  onChange={handleEditComment}
+                  placeholder="Add a comment..."
+                  autoFocus
+                />
 
-              <Button onClick={handleEditSubmit}>Update</Button>
-            </EditCommentBox>
-          ) : (
-            <CommentText>{comment.content}</CommentText>
-          )}
-        </Content>
+                <Button onClick={handleEditSubmit}>Update</Button>
+              </EditCommentBox>
+            ) : (
+              <CommentText>{comment.content}</CommentText>
+            )}
+          </Content>
 
-        <ActionsButtons>
-          {isCurrentUser(comment.user) ? (
-            <>
-              <DeleteButton>
-                <DeleteIcon />
-                Delete
-              </DeleteButton>
+          <ActionsButtons>
+            {isCurrentUser(comment.user) ? (
+              <>
+                <DeleteButton onClick={handleDeleteButton}>
+                  <DeleteIcon />
+                  Delete
+                </DeleteButton>
 
-              <EditButton onClick={handleEditButton}>
-                <EditIcon />
-                Edit
-              </EditButton>
-            </>
-          ) : (
-            <ReplyButton onClick={handleReplyButton}>
-              <ReplyIcon />
-              Reply
-            </ReplyButton>
-          )}
-        </ActionsButtons>
-      </Box>
+                <EditButton onClick={handleEditButton}>
+                  <EditIcon />
+                  Edit
+                </EditButton>
+              </>
+            ) : (
+              <ReplyButton onClick={handleReplyButton}>
+                <ReplyIcon />
+                Reply
+              </ReplyButton>
+            )}
+          </ActionsButtons>
+        </Box>
 
-      {isReplying && (
-        <CommentTextInput
-          value={replyText}
-          onChange={setReplyText}
-          onSend={handleReplySubmit}
-          autoFocus
-          isReplying
-        />
+        {isReplying && (
+          <CommentTextInput
+            value={replyText}
+            onChange={setReplyText}
+            onSend={handleReplySubmit}
+            autoFocus
+            isReplying
+          />
+        )}
+      </Container>
+
+      {isCurrentUser(comment.user) && (
+        <Modal
+          title="Delete comment"
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onCancel={handleDeleteCancel}
+          onDelete={handleDeleteConfirm}
+        >
+          <p>
+            Are you sure you want to delete this comment? This will remoce the comment and
+            can&lsquo;t be undone.
+          </p>
+        </Modal>
       )}
-    </Container>
+    </>
   );
 }

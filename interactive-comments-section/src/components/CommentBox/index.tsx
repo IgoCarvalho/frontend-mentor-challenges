@@ -1,32 +1,33 @@
-import { ChangeEvent, useState } from 'react';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
+import { ChangeEvent, useState } from 'react';
 
+import { Button } from '../Button';
+import { CommentTextInput } from '../CommentTextInput';
+import { DeleteIcon } from '../icons/DeleteIcon';
+import { EditIcon } from '../icons/EditIcon';
 import { ReplyIcon } from '../icons/ReplyIcon';
+import { Modal } from '../Modal';
+import { TextArea } from '../TextArea';
 import { Vote } from '../Vote';
+
+import { useComments } from '../../hooks/useComments';
+import { useUser } from '../../hooks/useUser';
 
 import type { CommentData } from '../../types/comment';
 
 import {
   ActionsButtons,
   Box,
+  CommentHeader,
+  CommentText,
   Container,
   Content,
   CurrentUserTag,
   DeleteButton,
   EditButton,
-  CommentHeader,
-  CommentText,
-  ReplyButton,
   EditCommentBox,
+  ReplyButton,
 } from './styles';
-
-import { useUser } from '../../hooks/useUser';
-import { DeleteIcon } from '../icons/DeleteIcon';
-import { EditIcon } from '../icons/EditIcon';
-import { CommentTextInput } from '../CommentTextInput';
-import { TextArea } from '../TextArea';
-import { Button } from '../Button';
-import { Modal } from '../Modal';
 
 interface CommentBoxProps {
   comment: CommentData;
@@ -42,6 +43,7 @@ export function CommentBox({ comment }: CommentBoxProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isCurrentUser } = useUser();
+  const { removeComment } = useComments();
 
   function handleReplyButton() {
     if (!isReplying) {
@@ -87,7 +89,8 @@ export function CommentBox({ comment }: CommentBoxProps) {
   }
 
   function handleDeleteConfirm() {
-    console.log('Delete comment');
+    removeComment(comment.id);
+
     closeModal();
   }
 

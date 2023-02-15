@@ -8,6 +8,7 @@ import * as storageService from '../services/storageService';
 interface CommentsContextData {
   comments: CommentData[];
   createComment: (author: User, text: string) => void;
+  removeComment: (commentId: number) => void;
 }
 
 const CommentsContext = createContext<CommentsContextData>({} as CommentsContextData);
@@ -34,7 +35,18 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
     setComments([...comments, newComment]);
   }
 
-  const context = useMemo<CommentsContextData>(() => ({ comments, createComment }), [comments]);
+  function removeComment(commentId: number) {
+    storageService.deleteComment(commentId);
+
+    const filteredComment = comments.filter((comment) => comment.id !== commentId);
+
+    setComments(filteredComment);
+  }
+
+  const context = useMemo<CommentsContextData>(
+    () => ({ comments, createComment, removeComment }),
+    [comments]
+  );
 
   return <CommentsContext.Provider value={context}>{children}</CommentsContext.Provider>;
 }

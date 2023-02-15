@@ -29,6 +29,14 @@ function saveComment(newComment: CommentData) {
   localStorage.setItem(COMMENTS_KEY, JSON.stringify(storageData));
 }
 
+function saveAllComments(comments: CommentData[]) {
+  const storageData = getComments();
+
+  storageData.comments = comments;
+
+  localStorage.setItem(COMMENTS_KEY, JSON.stringify(storageData));
+}
+
 export function createComment(author: User, text: string) {
   const now = Date.now();
 
@@ -44,4 +52,12 @@ export function createComment(author: User, text: string) {
   saveComment(newComment);
 
   return newComment;
+}
+
+export function deleteComment(commentId: number) {
+  const { comments } = getComments();
+
+  const filteredComments = comments.filter((comment) => comment.id !== commentId);
+
+  saveAllComments(filteredComments);
 }

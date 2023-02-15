@@ -31,9 +31,10 @@ import {
 
 interface CommentBoxProps {
   comment: CommentData;
+  belongsTo?: number;
 }
 
-export function CommentBox({ comment }: CommentBoxProps) {
+export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
 
@@ -42,8 +43,8 @@ export function CommentBox({ comment }: CommentBoxProps) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { isCurrentUser } = useUser();
-  const { removeComment } = useComments();
+  const { isCurrentUser, user } = useUser();
+  const { removeComment, createReply } = useComments();
 
   function handleReplyButton() {
     if (!isReplying) {
@@ -55,6 +56,7 @@ export function CommentBox({ comment }: CommentBoxProps) {
 
   function handleReplySubmit() {
     console.log(replyText);
+    createReply(user, replyText, comment, belongsTo);
   }
 
   function handleEditButton() {

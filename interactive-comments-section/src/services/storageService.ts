@@ -29,7 +29,7 @@ function saveComment(newComment: CommentData) {
   localStorage.setItem(COMMENTS_KEY, JSON.stringify(storageData));
 }
 
-function saveAllComments(comments: CommentData[]) {
+export function setComments(comments: CommentData[]) {
   const storageData = getComments();
 
   storageData.comments = comments;
@@ -37,7 +37,7 @@ function saveAllComments(comments: CommentData[]) {
   localStorage.setItem(COMMENTS_KEY, JSON.stringify(storageData));
 }
 
-export function createComment(author: User, text: string) {
+function createComment(author: User, text: string, replyingTo?: string) {
   const now = Date.now();
 
   const newComment: CommentData = {
@@ -45,9 +45,16 @@ export function createComment(author: User, text: string) {
     createdAt: now.toString(),
     content: text,
     replies: [],
+    replyingTo,
     score: 0,
     user: author,
   };
+
+  return newComment;
+}
+
+export function addComment(author: User, text: string) {
+  const newComment = createComment(author, text);
 
   saveComment(newComment);
 
@@ -59,5 +66,29 @@ export function deleteComment(commentId: number) {
 
   const filteredComments = comments.filter((comment) => comment.id !== commentId);
 
-  saveAllComments(filteredComments);
+  setComments(filteredComments);
+}
+
+function saveReply(commentId: number, reply: CommentData) {
+  const { comments } = getComments();
+
+  const updatedComments = comments.map((comment) => {
+    if (comment.id !== commentId) return comment;
+
+    comment.replies.push(reply);
+
+    return comment;
+  });
+
+  setComments(updatedComments);
+
+  return updatedComments;
+}
+
+export function addReply(author: User, text: string, replyingTo: string, commentId: number) {
+  const newComment = createComment(author, text, replyingTo);
+
+  const updatedComments = saveReply(commentId, newComment);
+
+  return updatedComments;
 }

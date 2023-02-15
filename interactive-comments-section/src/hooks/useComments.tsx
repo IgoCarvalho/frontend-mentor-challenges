@@ -9,6 +9,7 @@ interface CommentsContextData {
   comments: CommentData[];
   createComment: (author: User, text: string) => void;
   removeComment: (commentId: number) => void;
+  createReply: (author: User, text: string, replyingTo: CommentData, belongsTo?: number) => void;
 }
 
 const CommentsContext = createContext<CommentsContextData>({} as CommentsContextData);
@@ -21,16 +22,25 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
   const [comments, setComments] = useState<CommentData[]>([]);
 
   useEffect(() => {
-    fetch('/data.json')
-      .then((res) => res.json())
-      .then((commentRes) => {
-        const { comments: storageComments } = storageService.getComments();
-        setComments([...commentRes.comments, ...storageComments]);
-      });
+    const { comments: storedComments } = storageService.getComments();
+
+    if (storedComments.length > 0) {
+      setComments(storedComments);
+    } else {
+      fetch('/data.json')
+        .then((res) => res.json())
+        .then((commentRes) => {
+          const newComments = [...commentRes.comments, ...storedComments];
+
+          storageService.setComments(newComments);
+
+          setComments(newComments);
+        });
+    }
   }, []);
 
   function createComment(author: User, text: string) {
-    const newComment = storageService.createComment(author, text);
+    const newComment = storageService.addComment(author, text);
 
     setComments([...comments, newComment]);
   }
@@ -43,8 +53,21 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
     setComments(filteredComment);
   }
 
+  function createReply(author: User, text: string, replyingTo: CommentData, belongsTo?: number) {
+    const replyCommentId = belongsTo || replyingTo.id;
+
+    const updatedComments = storageService.addReply(
+      author,
+      text,
+      replyingTo.user.username,
+      replyCommentId
+    );
+
+    setComments(updatedComments);
+  }
+
   const context = useMemo<CommentsContextData>(
-    () => ({ comments, createComment, removeComment }),
+    () => ({ comments, createComment, removeComment, createReply }),
     [comments]
   );
 

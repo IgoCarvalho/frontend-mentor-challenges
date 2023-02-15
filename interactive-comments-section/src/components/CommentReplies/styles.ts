@@ -12,6 +12,7 @@ export const Container = styled.div`
 `;
 
 export const RepliesList = styled.ul`
+  width: 100%;
   list-style: none;
 
   display: flex;

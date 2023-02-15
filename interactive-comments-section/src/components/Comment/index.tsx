@@ -14,7 +14,9 @@ export function Comment({ comment }: CommentProps) {
     <Container>
       <CommentBox comment={comment} />
 
-      {!!comment.replies.length && <CommentReplies replies={comment.replies} />}
+      {!!comment.replies.length && (
+        <CommentReplies commentId={comment.id} replies={comment.replies} />
+      )}
     </Container>
   );
 }

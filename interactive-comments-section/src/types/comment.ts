@@ -5,6 +5,7 @@ export interface CommentData {
   content: string;
   createdAt: string;
   score: number;
+  replyingTo?: string;
   user: User;
   replies: CommentData[];
 }

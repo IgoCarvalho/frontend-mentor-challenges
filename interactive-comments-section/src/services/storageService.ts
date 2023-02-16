@@ -92,3 +92,22 @@ export function addReply(author: User, text: string, replyingTo: string, comment
 
   return updatedComments;
 }
+
+export function deleteReply(replyId: number, commentId: number) {
+  const { comments } = getComments();
+
+  const updatedComments = comments.map((comment) => {
+    if (comment.id !== commentId) return comment;
+
+    const updatedReplies = comment.replies.filter((reply) => reply.id !== replyId);
+
+    return {
+      ...comment,
+      replies: updatedReplies,
+    };
+  });
+
+  setComments(updatedComments);
+
+  return updatedComments;
+}

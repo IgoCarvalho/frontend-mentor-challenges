@@ -22,9 +22,11 @@ export function Home() {
 
   return (
     <Container>
-      {comments.map((m) => (
-        <Comment key={m.id} comment={m} />
-      ))}
+      {comments
+        .sort((a, b) => b.score - a.score)
+        .map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
 
       <CommentTextInput
         value={newComment}

@@ -18,6 +18,12 @@ export const Box = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 2.4rem;
+
+  @media screen and (max-width: 425px) {
+    padding: 1.6rem;
+    flex-direction: column-reverse;
+    gap: 1.6rem;
+  }
 `;
 
 export const Content = styled.div`
@@ -65,6 +71,13 @@ export const ActionsButtons = styled.div`
   position: absolute;
   top: 2.4rem;
   right: 2.4rem;
+
+  @media screen and (max-width: 425px) {
+    top: auto;
+    bottom: 2rem;
+    right: 1.6rem;
+    gap: 1.6rem;
+  }
 `;
 
 const ActionButton = styled.button`

@@ -12,6 +12,23 @@ export const Container = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 1.6rem;
+
+  @media screen and (max-width: 425px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem;
+
+    img {
+      order: 1;
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+
+    button {
+      order: 2;
+    }
+  }
 `;
 
 export const UserImage = styled.img`

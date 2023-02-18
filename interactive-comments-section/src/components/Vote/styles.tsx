@@ -9,6 +9,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
+
+  @media screen and (max-width: 425px) {
+    flex-direction: row;
+  }
 `;
 
 export const Counter = styled.p`
@@ -20,6 +24,9 @@ export const VoteButton = styled.button`
   height: 4rem;
   background-color: transparent;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: opacity 200ms;
 

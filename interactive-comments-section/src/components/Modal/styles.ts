@@ -15,13 +15,17 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
 
   animation: ${overlayAnim} 200ms forwards;
+
+  @media screen and (max-width: 425px) {
+    padding: 0 1.6rem;
+  }
 `;
 
 const containerAnim = keyframes`
@@ -41,11 +45,19 @@ export const Container = styled.div`
   background: white;
 
   animation: ${containerAnim} 200ms forwards;
+
+  @media screen and (max-width: 425px) {
+    padding: 2.4rem 2.8rem;
+  }
 `;
 
 export const Content = styled.div`
   padding: 2.2rem 0;
   line-height: 1.4;
+
+  @media screen and (max-width: 425px) {
+    padding: 1.8rem 0;
+  }
 `;
 
 export const ModalTitle = styled.h2`
@@ -56,6 +68,10 @@ export const ModalTitle = styled.h2`
 export const ActionsButtons = styled.div`
   display: flex;
   gap: 1.4rem;
+
+  @media screen and (max-width: 425px) {
+    gap: 1.2rem;
+  }
 `;
 
 const ActionButton = styled.button`

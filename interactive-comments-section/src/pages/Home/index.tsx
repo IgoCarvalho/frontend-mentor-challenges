@@ -6,7 +6,7 @@ import { CommentTextInput } from '../../components/CommentTextInput';
 import { useComments } from '../../hooks/useComments';
 import { useUser } from '../../hooks/useUser';
 
-import { Container } from './styles';
+import { CommentsContainer, Container } from './styles';
 
 export function Home() {
   const [newComment, setNewComment] = useState('');
@@ -22,11 +22,13 @@ export function Home() {
 
   return (
     <Container>
-      {comments
-        .sort((a, b) => b.score - a.score)
-        .map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
+      <CommentsContainer>
+        {comments
+          .sort((a, b) => b.score - a.score)
+          .map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+      </CommentsContainer>
 
       <CommentTextInput
         value={newComment}

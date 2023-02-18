@@ -8,6 +8,11 @@ export const Container = styled.div`
     width: 2px;
     margin: 0 4.3rem;
     background-color: var(--light-gray);
+
+    @media screen and (max-width: 425px) {
+      margin-left: 0;
+      margin-right: 1.6rem;
+    }
   }
 `;
 
@@ -18,4 +23,8 @@ export const RepliesList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media screen and (max-width: 425px) {
+    gap: 1.6rem;
+  }
 `;

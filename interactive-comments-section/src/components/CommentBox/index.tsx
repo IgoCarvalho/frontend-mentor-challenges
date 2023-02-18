@@ -44,7 +44,7 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isCurrentUser, user } = useUser();
-  const { removeComment, createReply, removeReply, editComment } = useComments();
+  const { removeComment, createReply, removeReply, editComment, vote } = useComments();
 
   function handleReplyButton() {
     if (!isReplying) {
@@ -119,11 +119,19 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
     return formattedDateText;
   }
 
+  function handleVote(voteValue: number) {
+    if (belongsTo) {
+      vote(belongsTo, voteValue, comment.id);
+    } else {
+      vote(comment.id, voteValue);
+    }
+  }
+
   return (
     <>
       <Container>
         <Box>
-          <Vote value={comment.score} />
+          <Vote onVote={handleVote} value={comment.score} />
 
           <Content>
             <CommentHeader>

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { MinusIcon } from '../icons/MinusIcon';
 import { PlusIcon } from '../icons/PlusIcon';
 
@@ -7,17 +5,16 @@ import { Container, Counter, VoteButton } from './styles';
 
 interface VoteProps {
   value: number;
+  onVote: (voteCounter: number) => void;
 }
 
-export function Vote({ value }: VoteProps) {
-  const [voteCounter, setVoteCounter] = useState(value ?? 0);
-
+export function Vote({ value, onVote }: VoteProps) {
   function upVote() {
-    setVoteCounter(voteCounter + 1);
+    onVote(value + 1);
   }
 
   function downVote() {
-    setVoteCounter(voteCounter - 1);
+    onVote(value - 1);
   }
 
   return (
@@ -25,7 +22,7 @@ export function Vote({ value }: VoteProps) {
       <VoteButton onClick={upVote}>
         <PlusIcon />
       </VoteButton>
-      <Counter>{voteCounter}</Counter>
+      <Counter>{value}</Counter>
       <VoteButton onClick={downVote}>
         <MinusIcon />
       </VoteButton>

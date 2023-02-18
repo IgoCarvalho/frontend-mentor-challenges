@@ -12,6 +12,7 @@ interface CommentsContextData {
   createReply: (author: User, text: string, replyingTo: CommentData, belongsTo?: number) => void;
   removeReply: (replyId: number, commentId: number) => void;
   editComment: (commentId: number, text: string, replyId?: number) => void;
+  vote: (commentId: number, voteValue: number, replyId?: number) => void;
 }
 
 const CommentsContext = createContext<CommentsContextData>({} as CommentsContextData);
@@ -80,8 +81,14 @@ export function CommentsProvider({ children }: CommentsProviderProps) {
     setComments(updatedComments);
   }
 
+  function vote(commentId: number, voteValue: number, replyId?: number) {
+    const updatedComments = storageService.updatedCommentVote(commentId, voteValue, replyId);
+
+    setComments(updatedComments);
+  }
+
   const context = useMemo<CommentsContextData>(
-    () => ({ comments, createComment, removeComment, createReply, removeReply, editComment }),
+    () => ({ comments, createComment, removeComment, createReply, removeReply, editComment, vote }),
     [comments]
   );
 

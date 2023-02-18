@@ -44,7 +44,7 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isCurrentUser, user } = useUser();
-  const { removeComment, createReply, removeReply } = useComments();
+  const { removeComment, createReply, removeReply, editComment } = useComments();
 
   function handleReplyButton() {
     if (!isReplying) {
@@ -73,7 +73,13 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
   }
 
   function handleEditSubmit() {
-    console.log(commentText);
+    if (belongsTo) {
+      editComment(belongsTo, commentText, comment.id);
+    } else {
+      editComment(comment.id, commentText);
+    }
+
+    setIsEditing(false);
   }
 
   function closeModal() {

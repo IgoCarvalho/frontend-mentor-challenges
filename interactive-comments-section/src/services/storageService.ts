@@ -111,3 +111,38 @@ export function deleteReply(replyId: number, commentId: number) {
 
   return updatedComments;
 }
+
+export function editComment(commentId: number, text: string, replyId?: number) {
+  const { comments } = getComments();
+
+  const updatedComments = comments.map((comment) => {
+    if (comment.id === commentId) {
+      if (replyId) {
+        const updatedReplies = comment.replies.map((reply) => {
+          if (reply.id !== replyId) return reply;
+
+          return {
+            ...reply,
+            content: text,
+          };
+        });
+
+        return {
+          ...comment,
+          replies: updatedReplies,
+        };
+      }
+
+      return {
+        ...comment,
+        content: text,
+      };
+    }
+
+    return comment;
+  });
+
+  setComments(updatedComments);
+
+  return updatedComments;
+}

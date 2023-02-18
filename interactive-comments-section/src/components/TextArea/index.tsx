@@ -7,11 +7,15 @@ type TextAreaProps = InputHTMLAttributes<HTMLTextAreaElement>;
 export function TextArea({ onChange, autoFocus, ...props }: TextAreaProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  function handleTextAreaSize() {
     if (inputRef.current) {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }
+  }
+
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    handleTextAreaSize();
 
     if (onChange) {
       onChange(event);
@@ -23,6 +27,8 @@ export function TextArea({ onChange, autoFocus, ...props }: TextAreaProps) {
       inputRef.current?.focus();
       const textSize = inputRef.current?.value.length ?? 0;
       inputRef.current?.setSelectionRange(textSize, textSize);
+
+      handleTextAreaSize();
     }
   }, []);
 

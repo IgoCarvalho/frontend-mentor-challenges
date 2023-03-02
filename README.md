@@ -14,4 +14,7 @@
 
 ### Interactive Comments Section
 
-> Link em breve
+[![Interactive Comments Section](./interactive-comments-section/.github/banner.png)](./interactive-comments-section/)
+![React](https://img.shields.io/badge/React-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)&nbsp;
+![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?&style=flat&logo=typescript&logoColor=white)&nbsp;
+

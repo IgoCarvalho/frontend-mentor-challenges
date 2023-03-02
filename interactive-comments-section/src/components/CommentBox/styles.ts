@@ -62,6 +62,11 @@ export const CurrentUserTag = styled.div`
 export const CommentText = styled.p`
   color: var(--grayish-blue);
   line-height: 1.4;
+
+  span {
+    color: var(--moderate-blue);
+    font-weight: 500;
+  }
 `;
 
 export const ActionsButtons = styled.div`

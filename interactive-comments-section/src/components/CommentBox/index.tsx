@@ -127,6 +127,17 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
     }
   }
 
+  function highlightUserNames(message: string) {
+    const regExTest = /(@\w+)/g;
+
+    const parsedMessage = message.split(regExTest).map((part) => {
+      if (part.match(regExTest)) return <span key={part}>{part}</span>;
+      return part;
+    });
+
+    return parsedMessage;
+  }
+
   return (
     <>
       <Container>
@@ -156,7 +167,7 @@ export function CommentBox({ comment, belongsTo }: CommentBoxProps) {
                 <Button onClick={handleEditSubmit}>Update</Button>
               </EditCommentBox>
             ) : (
-              <CommentText>{comment.content}</CommentText>
+              <CommentText>{highlightUserNames(comment.content)}</CommentText>
             )}
           </Content>
 

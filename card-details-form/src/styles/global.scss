@@ -1,0 +1,47 @@
+:root {
+
+  --white: #ffffff;
+  --gray-400: #8e8593;
+  --gray-300: #dedddf;
+  --violet-900: #21092f;
+  --red-500: #ff5252;
+
+  --active-input-border: linear-gradient(#6448fe, #600594);
+
+  --background: var(--white);
+  --text: var(--violet-900);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+input {
+  font-size: 1rem;
+  font-family: inherit;
+}

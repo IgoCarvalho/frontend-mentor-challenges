@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  background-color: var(--violet-900);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 6px;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+  }
+}

@@ -1,0 +1,59 @@
+.container {
+  .frontCardContainer {
+    width: 447px;
+    height: 245px;
+    border-radius: 10px;
+    background-color: #623ff1;
+    background-image: url('../../assets/images/bg-card-front.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .frontCardHeader {
+      padding: 28px 32px 0;
+    }
+
+    .frontCardInfo {
+      padding: 0 32px 26px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 26px;
+      color: var(--white);
+      font-size: 14px;
+      letter-spacing: 0.14em;
+
+      .cardNumber {
+        width: 100%;
+        font-size: 28px;
+        letter-spacing: 0.12em;
+      }
+
+      .cardholderName {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .backCardContainer {
+    margin-left: 94px;
+    margin-top: 37px;
+    width: 447px;
+    height: 245px;
+    border-radius: 10px;
+    background-color: #ededef;
+    background-image: url('../../assets/images/bg-card-back.png');
+    background-size: cover;
+    position: relative;
+
+    .cardCvc {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      position: absolute;
+      top: 112px;
+      right: 60px;
+    }
+  }
+}

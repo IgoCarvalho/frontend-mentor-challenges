@@ -1,4 +1,5 @@
 import { Button } from './components/Button/Button';
+import { Card } from './components/Card/Card';
 import { TextField } from './components/TextField/TextField';
 
 export function App() {
@@ -15,6 +16,8 @@ export function App() {
         error="Wrong format"
         placeholder="e.g. Jane Appleseed"
       />
+
+      <Card number="959164896389101E" cardholder="Felicia Leire" expiry="0900" cvc="000" />
     </div>
   );
 }

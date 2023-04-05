@@ -6,20 +6,31 @@ type CardProps = {
   number: string;
   cvc: string;
   cardholder: string;
-  expiry: string;
+  expiryMont: string;
+  expiryYear: string;
 };
 
-export function Card({ number, cardholder, cvc, expiry }: CardProps) {
+export function Card({ number, cardholder, cvc, expiryMont, expiryYear }: CardProps) {
   function formatCardNumber() {
     const filledNumber = number.padEnd(16, '•');
 
-    const numberFormatted = filledNumber.replace(/(.{4})/g, (code) => code.concat(' ')).trim();
+    const cardNumberDigits = 16;
+    const cardNumberSpaces = 3;
+    const cardNumberSize = cardNumberDigits + cardNumberSpaces;
+
+    const numberFormatted = filledNumber
+      .replace(/(.{4})/g, (code) => code.concat(' '))
+      .trim()
+      .slice(0, cardNumberSize);
 
     return numberFormatted;
   }
 
   function formatExpiryDate() {
-    const filledDate = expiry.padEnd(4, '•');
+    const filledMonth = expiryMont.padEnd(2, '•').slice(0, 2);
+    const filledYear = expiryYear.padEnd(2, '•').slice(0, 2);
+
+    const filledDate = `${filledMonth}${filledYear}`;
 
     const dateFormatted = filledDate.replace(/(.{2})/, (date) => date.concat('/')).trim();
 
@@ -27,7 +38,7 @@ export function Card({ number, cardholder, cvc, expiry }: CardProps) {
   }
 
   function formatCvc() {
-    const filledCode = cvc.padEnd(3, '•');
+    const filledCode = cvc.padEnd(3, '•').slice(0, 3);
 
     return filledCode;
   }

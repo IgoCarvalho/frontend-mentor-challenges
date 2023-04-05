@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { ForwardedRef, InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 
 import { Input } from '../Input/Input';
 
@@ -10,7 +10,10 @@ type TextFieldProps = {
   children?: ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export function TextField({ name, label, error, children, ...props }: TextFieldProps) {
+function TextFieldBase(
+  { name, label, error, children, ...props }: TextFieldProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
   return (
     <div className={styles.container}>
       <label htmlFor={name} className={styles.label}>
@@ -19,9 +22,11 @@ export function TextField({ name, label, error, children, ...props }: TextFieldP
       {children ? (
         <div>{children}</div>
       ) : (
-        <Input {...props} name={name} id={name} error={!!error} />
+        <Input {...props} name={name} id={name} error={!!error} ref={ref} />
       )}
       {!!error && <span className={styles.errorMessage}>{error}</span>}
     </div>
   );
 }
+
+export const TextField = forwardRef(TextFieldBase);

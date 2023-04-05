@@ -56,4 +56,51 @@
       right: 60px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .frontCardContainer,
+    .backCardContainer {
+      width: 286px;
+      height: 157px;
+    }
+
+    .frontCardContainer {
+      margin-top: -64px;
+      z-index: 10;
+
+      .frontCardHeader {
+        padding: 18px 20px 0;
+
+        img {
+          height: 30px;
+        }
+      }
+
+      .frontCardInfo {
+        padding: 0 20px 20px;
+        row-gap: 16px;
+        font-size: 10px;
+        letter-spacing: 0.07em;
+
+        .cardNumber {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .backCardContainer {
+      margin-top: 0;
+      margin-left: 57px;
+
+      .cardCvc {
+        font-size: 10px;
+        letter-spacing: 0.07em;
+        top: 71px;
+        right: 38px;
+      }
+    }
+  }
 }

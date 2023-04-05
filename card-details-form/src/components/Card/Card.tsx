@@ -1,4 +1,4 @@
-import { CardLogo } from '../icons/CardLogo';
+import cardLogoImg from '../../assets/images/card-logo.svg';
 
 import styles from './Card.module.scss';
 
@@ -51,7 +51,7 @@ export function Card({ number, cardholder, cvc, expiryMont, expiryYear }: CardPr
     <div className={styles.container}>
       <div className={styles.frontCardContainer}>
         <div className={styles.frontCardHeader}>
-          <CardLogo />
+          <img src={cardLogoImg} alt="Card logo" />
         </div>
         <div className={styles.frontCardInfo}>
           <p className={styles.cardNumber}>{cardNumber}</p>

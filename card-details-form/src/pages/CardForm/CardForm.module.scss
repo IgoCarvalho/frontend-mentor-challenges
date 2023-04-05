@@ -10,9 +10,9 @@
   .cardContainer {
     position: relative;
     width: 319px;
-    // min-width: 319px;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     &::before {
       content: '';
@@ -32,6 +32,7 @@
     .cardWrapper {
       position: absolute;
       left: 0;
+      z-index: 10;
 
       animation: fadeInLeft 500ms forwards;
     }
@@ -67,6 +68,53 @@
 
       .formActionsContainer {
         margin-top: 40px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .cardContainer {
+      height: 240px;
+      width: 100%;
+      padding: 0 16px;
+
+      &::before {
+        width: 100%;
+        background-image: url('../../assets/images/bg-main-mobile.png');
+        background-position: center top;
+      }
+
+      .cardWrapper {
+        top: 32px;
+        left: initial;
+      }
+    }
+
+    .formContainer {
+      margin-top: 90px;
+      padding: 0 20px;
+      justify-content: center;
+      align-items: flex-start;
+
+      .form {
+
+        .formFieldsContainer {
+          row-gap: 20px;
+        }
+
+        .formGroup {
+          gap: 10px;
+        }
+
+        .dateFieldContainer {
+          gap: 8px;
+        }
+
+        .formActionsContainer {
+          margin-top: 28px;
+        }
       }
     }
   }

@@ -17,9 +17,10 @@ const cvcValidation = z
 const cardNumberValidation = z
   .string()
   .nonempty("Can't be blank")
-  .regex(/^[0-9]+$/, 'Wrong format, numbers only')
+  .regex(/^([0-9]|\s)+$/, 'Wrong format, numbers only')
+  .regex(/^(([0-9]{4}){4}|([0-9]{4}\s){3}[0-9]{4})$/, 'Wrong format')
   .min(16, 'Wrong format')
-  .max(16, 'Wrong format');
+  .max(19, 'Wrong format');
 
 export const cardFormSchema = z.object({
   cardholderName: z.string().nonempty("Can't be blank"),

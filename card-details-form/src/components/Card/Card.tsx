@@ -12,7 +12,7 @@ type CardProps = {
 
 export function Card({ number, cardholder, cvc, expiryMont, expiryYear }: CardProps) {
   function formatCardNumber() {
-    const filledNumber = number.padEnd(16, '•');
+    const filledNumber = number.replace(/\s/g, '').padEnd(16, '•');
 
     const cardNumberDigits = 16;
     const cardNumberSpaces = 3;

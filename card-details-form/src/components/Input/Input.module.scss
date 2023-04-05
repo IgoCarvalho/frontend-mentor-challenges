@@ -1,0 +1,30 @@
+
+.input {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: var(--violet-900);
+  outline: none;
+
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(var(--gray-300), var(--gray-300)) border-box;
+  border: 1px solid transparent;
+
+  &.error {
+    background: linear-gradient(white, white) padding-box,
+    linear-gradient(var(--red-500), var(--red-500)) border-box;
+  }
+
+  &::placeholder {
+    color: var(--gray-400);
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: linear-gradient(white, white) padding-box,
+      var(--active-input-border) border-box;
+  }
+}

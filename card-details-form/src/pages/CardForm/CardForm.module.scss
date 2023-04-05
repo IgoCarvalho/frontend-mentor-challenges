@@ -1,0 +1,69 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1049px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+
+  .cardContainer {
+    position: relative;
+    width: 319px;
+    // min-width: 319px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      width: 40vw;
+      height: 100%;
+      background-color: var(--violet-900);
+      background-image: url('../../assets/images/bg-main-desktop.png');
+      background-size: cover;
+      background-position: right top;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+    }
+
+    .cardWrapper {
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  .formContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .form {
+      width: 100%;
+      max-width: 381px;
+
+      .formFieldsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+      }
+
+      .formGroup {
+        display: flex;
+        gap: 20px;
+      }
+
+      .dateFieldContainer {
+        display: flex;
+        gap: 10px;
+      }
+
+      .formActionsContainer {
+        margin-top: 40px;
+      }
+    }
+  }
+}

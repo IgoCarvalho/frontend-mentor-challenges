@@ -69,12 +69,15 @@ export function CardForm() {
                 {...register('cardholderName')}
               />
 
-              <TextField
-                label="CARD NUMBER"
-                placeholder="e.g. 1234 5678 9123 0000"
-                error={errors.cardNumber?.message}
-                {...register('cardNumber')}
-              />
+              <TextField name="card-number" label="CARD NUMBER" error={errors.cardNumber?.message}>
+                <Input
+                  id="card-number"
+                  format="#### #### #### ####"
+                  placeholder="e.g. 1234 5678 9123 0000"
+                  {...register('cardNumber')}
+                  error={!!errors.cardNumber}
+                />
+              </TextField>
 
               <div className={styles.formGroup}>
                 <TextField
